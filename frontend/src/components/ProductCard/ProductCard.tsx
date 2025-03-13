@@ -10,7 +10,7 @@ export const ProductCard: FC<Product> = ({
     price,
     priceSymbol,
     category,
-    imgUrl,
+    imgUrl, 
 }) => {
     return (
         <div className="product-card">

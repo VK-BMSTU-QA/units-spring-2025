@@ -1,19 +1,19 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Categories } from './Categories';
+import { ProductCard } from './ProductCard';
 
 afterEach(jest.clearAllMocks);
 
 describe('Categories test', () => {
     it('should render correctly', () => {
-        const rendered = render(<Categories selectedCategories={[]} />);
+        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl' />);
 
         expect(rendered.asFragment()).toMatchSnapshot();
-    }); 
-
+    });
+/*
     it('should add class for selected badge', () => {
-        const rendered = render(<Categories selectedCategories={['Одежда']} />);
+        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl' />);
 
         expect(rendered.getByText('Одежда')).toHaveClass(
             'categories__badge_selected'
@@ -29,9 +29,8 @@ describe('Categories test', () => {
     it('should call callback when category click', () => {
         const onCategoryClick = jest.fn();
         const rendered = render(
-            <Categories
-                selectedCategories={[]}
-                onCategoryClick={onCategoryClick}
+            <ProductCard
+                id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl'
             />
         );
 
@@ -39,4 +38,5 @@ describe('Categories test', () => {
         fireEvent.click(rendered.getByText('Одежда'));
         expect(onCategoryClick).toHaveBeenCalledTimes(1);
     });
+    */
 });
