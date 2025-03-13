@@ -11,7 +11,7 @@ exports[`Test MainPage component renders as in shapshot 1`] = `
       VK Маркет
     </h2>
     <h3>
-      04:00:00
+      03:24:00
     </h3>
     <div
       class="main-page__parameters"
