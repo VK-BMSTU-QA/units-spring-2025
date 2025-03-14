@@ -118,5 +118,5 @@ def test_all(self, test_cases, func):
                 self.assertRaises(i[1], func, i[0])
 
 
-if name == "main":
+if __name__ == "main":
     unittest.main()
