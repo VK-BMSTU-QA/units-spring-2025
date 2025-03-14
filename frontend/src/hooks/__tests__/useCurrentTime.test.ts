@@ -30,4 +30,4 @@ describe("useOutsideClick", () => {
     fireEvent.click(outside);
     expect(callback).toHaveBeenCalledTimes(1);
   });
-});
+}); 

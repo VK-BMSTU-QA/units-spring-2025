@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ProductCard } from './ProductCard';
+import { getPrice } from '../../utils';
 
 afterEach(jest.clearAllMocks);
 
@@ -11,32 +12,45 @@ describe('Categories test', () => {
 
         expect(rendered.asFragment()).toMatchSnapshot();
     });
-/*
-    it('should add class for selected badge', () => {
-        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl' />);
 
-        expect(rendered.getByText('Одежда')).toHaveClass(
-            'categories__badge_selected'
+    it('should have all and image ', () => {
+        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='/imgUrl.png' />);
+
+        expect(rendered.getByText('name')).toHaveClass(
+            'product-card__name'
         );
-        expect(rendered.getByText('Электроника')).not.toHaveClass(
-            'categories__badge_selected'
+        expect(rendered.getByText('description')).toHaveClass(
+            'product-card__description'
         );
-        expect(rendered.getByText('Для дома')).not.toHaveClass(
-            'categories__badge_selected'
+        expect(rendered.getByText('1 $')).toHaveClass(
+            'product-card__price'
         );
+        expect(rendered.getByText('Для дома')).toHaveClass(
+            'product-card__category'
+        );
+        expect(rendered.getByAltText('name')).toHaveClass(
+            'product-card__image'
+        );
+
     });
 
-    it('should call callback when category click', () => {
-        const onCategoryClick = jest.fn();
-        const rendered = render(
-            <ProductCard
-                id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl'
-            />
-        );
+    it('should have all but img', () => {
+        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='₽' category="Для дома"/>);
 
-        expect(onCategoryClick).toHaveBeenCalledTimes(0);
-        fireEvent.click(rendered.getByText('Одежда'));
-        expect(onCategoryClick).toHaveBeenCalledTimes(1);
+        expect(rendered.getByText('name')).toHaveClass(
+            'product-card__name'
+        );
+        expect(rendered.getByText('description')).toHaveClass(
+            'product-card__description'
+        );
+        expect(rendered.getByText('1 ₽')).toHaveClass(
+            'product-card__price'
+        );
+        expect(rendered.getByText('Для дома')).toHaveClass(
+            'product-card__category'
+        );
+        expect(rendered.queryByAltText('name')).not.toBeInTheDocument();
+
     });
-    */
+
 });
