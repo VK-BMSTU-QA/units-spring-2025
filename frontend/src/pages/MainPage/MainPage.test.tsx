@@ -6,11 +6,21 @@ import { MainPage } from './MainPage';
 afterEach(jest.clearAllMocks);
 
 describe('MainPage test', () => {
-    /* it('should render correctly', () => {
+    it('should render correctly', () => {
         const rendered = render(<MainPage />);
 
         expect(rendered.asFragment()).toMatchSnapshot();
-    }); */
+    });
+
+    it('should show output without filter', () => {
+        const rendered = render(<MainPage />);
+
+        const categories = ['Одежда', 'Для дома', 'Электроника'];
+        const productCategories = document.querySelectorAll('.product-card__category');
+        productCategories.forEach((category) => {
+            expect(categories).toContain(category.textContent);
+        })
+    });
 
     it('should filter output by one category', () => {
         const rendered = render(<MainPage />);

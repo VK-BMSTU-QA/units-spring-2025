@@ -2,18 +2,35 @@ import { applyCategories } from '../applyCategories';
 import { Category, Product } from '../../types';
 import { updateCategories } from '../updateCategories';
 
-describe('test apply categories function', () => {
-    const currentCategories : Category[] = ["Одежда", "Для дома"];
-    const newCategory : Category = "Электроника";
-    const existedCategory : Category = 'Одежда';
+describe('test applyCategories function', () => {
+    const testCases = [
+        { 
+            currentCategories: [], 
+            changedCategories: 'Одежда', 
+            expected: ['Одежда'] 
+        },
+        { 
+            currentCategories: ['Одежда'], 
+            changedCategories: 'Одежда', 
+            expected: [] 
+            
+        },
+        { 
+            currentCategories: ['Одежда', 'Для дома'], 
+            changedCategories: 'Электроника', 
+            expected: ['Одежда', 'Для дома', 'Электроника'] 
+        },
+        { 
+            currentCategories: ['Одежда', 'Для дома', 'Электроника'], 
+            changedCategories: 'Одежда', 
+            expected: ['Для дома', 'Электроника'] 
+        },
+    ];
 
-    it('should add new category', () => {
-        const updatedCategories = updateCategories(currentCategories, newCategory);
-        expect(updatedCategories).toContain(newCategory);
-    });
-
-    it('should remove existed category', () => {
-        const updatedCategories = updateCategories(currentCategories, existedCategory);
-        expect(updatedCategories).not.toContain(existedCategory);
-    });
+    test.each(testCases)(
+        'updateCategories(%s, %s) should return %s',
+        ({ currentCategories, changedCategories, expected }) => {
+            expect(updateCategories(currentCategories as Category[], changedCategories as Category)).toStrictEqual(expected);
+        }
+    );
 });

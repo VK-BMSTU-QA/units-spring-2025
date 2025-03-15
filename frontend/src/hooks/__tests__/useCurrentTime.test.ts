@@ -25,5 +25,12 @@ describe('useCurrentTime', () => {
         expect(result.current).not.toEqual(initialTime);
         expect(result.current).toBe(new Date().toLocaleTimeString('ru-RU'));
     });
+
+    it('should clear interval on unmount', () => {
+        jest.spyOn(global, 'clearInterval');
+        const { unmount } = renderHook(() => useCurrentTime());
+        unmount();
+        expect(clearInterval).toHaveBeenCalledTimes(1);
+    });
 });
 

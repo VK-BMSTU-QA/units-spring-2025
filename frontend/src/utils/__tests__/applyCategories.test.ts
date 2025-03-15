@@ -38,6 +38,11 @@ describe('test apply categories function', () => {
     const category2 : Category = "Электроника";
     const category3 : Category = "Для дома";
 
+    it('should return products without filter', () => {
+        const productsFiltered = applyCategories(products, []);
+        expect(productsFiltered).toBe(products);
+    });
+
     it('should return products filtered by one filter', () => {
         const productsFiltered = applyCategories(products, [category1]);
         productsFiltered.forEach((product) => {
