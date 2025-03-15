@@ -14,7 +14,7 @@ jest.mock('../../hooks', () => ({
 }));
 
 jest.mock('../../utils', () => ({
-    getPrice: (value: number, symbol: PriceSymbol = '₽') => `${value.toLocaleString('ru-RU')} ${symbol}`,
+    getPrice: () => `100 $`,
     applyCategories: (products: Product[], categories: Category[]) =>
         categories.length ? products.filter((product: Product) => categories.includes(product.category)) : products,
     updateCategories: (currentCategories: Category[], changedCategories: Category) =>
