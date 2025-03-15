@@ -19,5 +19,11 @@ describe('test updateCategories function', () => {
                 'Электроника'
             )
         ).toEqual(['Одежда', 'Для дома']);
+        expect(
+            updateCategories(
+                ['Одежда', 'Для дома', 'Одежда', 'Электроника'],
+                'Одежда'
+            )
+        ).toEqual(['Для дома', 'Электроника']);
     });
 });
