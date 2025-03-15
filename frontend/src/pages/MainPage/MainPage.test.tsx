@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
 import { MainPage } from './MainPage';
-import { Category, Product } from '../../types';
+import { Category, PriceSymbol, Product } from '../../types';
 
 jest.mock('../../hooks', () => ({
     useProducts: jest.fn(() => [
@@ -14,7 +14,7 @@ jest.mock('../../hooks', () => ({
 }));
 
 jest.mock('../../utils', () => ({
-    getPrice: jest.fn(),
+    getPrice: (value: number, symbol: PriceSymbol = '₽') => `${value.toLocaleString('ru-RU')} ${symbol}`,
     applyCategories: (products: Product[], categories: Category[]) =>
         categories.length ? products.filter((product: Product) => categories.includes(product.category)) : products,
     updateCategories: (currentCategories: Category[], changedCategories: Category) =>
