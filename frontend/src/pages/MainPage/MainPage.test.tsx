@@ -48,4 +48,8 @@ describe('MainPage', () => {
         const productCards = screen.getAllByText('Электроника', { selector: '.product-card__category' });
         expect(productCards).toHaveLength(1);
     });
+    it('should render correctly', () => {
+        const { asFragment } = render(<MainPage />);
+        expect(asFragment()).toMatchSnapshot();
+    });
 });

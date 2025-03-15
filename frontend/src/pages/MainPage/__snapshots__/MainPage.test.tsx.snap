@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="main-page"
+  >
+    <h2
+      class="main-page__title"
+    >
+      VK Маркет
+    </h2>
+    <h3>
+      2025-03-13 12:00
+    </h3>
+    <div
+      class="main-page__parameters"
+    >
+      <div>
+        <button
+          data-testid="category-electronics"
+        >
+          Электроника
+        </button>
+        <button
+          data-testid="category-clothing"
+        >
+          Одежда
+        </button>
+      </div>
+    </div>
+    <div
+      class="product-card"
+    >
+      <div
+        class="product-card__text"
+      >
+        <h2
+          class="product-card__name"
+        >
+          Product 1
+        </h2>
+        <div
+          class="product-card__description"
+        >
+          Смартфон
+        </div>
+        <h1
+          class="product-card__price"
+        >
+          1 000 $
+        </h1>
+        <div
+          class="product-card__category"
+        >
+          Электроника
+        </div>
+      </div>
+    </div>
+    <div
+      class="product-card"
+    >
+      <div
+        class="product-card__text"
+      >
+        <h2
+          class="product-card__name"
+        >
+          Product 2
+        </h2>
+        <div
+          class="product-card__description"
+        >
+          Тёплая куртка
+        </div>
+        <h1
+          class="product-card__price"
+        >
+          200 $
+        </h1>
+        <div
+          class="product-card__category"
+        >
+          Одежда
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
