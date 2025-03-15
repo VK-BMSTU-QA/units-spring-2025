@@ -1,5 +1,5 @@
 import unittest
-from calculator import Calculator
+from src.calculator import Calculator
 import math
 import cmath  # Модуль для работы с комплексными числами
 
