@@ -69,7 +69,11 @@ describe('MainPage test', () => {
         const category = rendered.getAllByText('Одежда')
 
         fireEvent.click(category[0])
-        expect(category[0]).toHaveClass('categories__badge_selected')
+        
+        expect(rendered.getByText('Костюм гуся')).toBeInTheDocument()
+        expect(rendered.queryByText('Настольная лампа')).not.toBeInTheDocument()
+        expect(rendered.queryByText('Принтер')).not.toBeInTheDocument()
+        expect(rendered.queryByText('IPhone 14 Pro')).not.toBeInTheDocument()
     })
 
     it('current time', () => {

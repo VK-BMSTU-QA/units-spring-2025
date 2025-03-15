@@ -32,7 +32,7 @@ exports[`ProductCard test should render correctly 1`] = `
     <img
       alt="name"
       class="product-card__image"
-      src="imgUrl"
+      src="/imgUrl.png"
     />
   </div>
 </DocumentFragment>

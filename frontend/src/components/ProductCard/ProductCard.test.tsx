@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ProductCard } from './ProductCard';
 import { getPrice } from '../../utils';
+import type { Product } from '../../types';
 
 jest.mock('../../utils/getPrice', () => ({
     getPrice: jest.fn((a, b = '₽') => a + " " + b),
@@ -10,16 +11,24 @@ jest.mock('../../utils/getPrice', () => ({
 
 afterEach(jest.clearAllMocks);
 
-
+const product: Product = {
+    id: 1,
+    name: 'name',
+    description: 'description',
+    price: 1,
+    priceSymbol: '$',
+    category: 'Для дома',
+    imgUrl: '/imgUrl.png',
+}
 
 describe('ProductCard test', () => {
     it('should render correctly', () => {
-        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl' />);
+        const rendered = render(<ProductCard {...product} />);
         expect(rendered.asFragment()).toMatchSnapshot();
     });
 
     it('should have all and image ', () => {
-        const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='/imgUrl.png' />);
+        const rendered = render(<ProductCard {...product} />);
 
         expect(rendered.getByText('name')).toHaveClass(
             'product-card__name'

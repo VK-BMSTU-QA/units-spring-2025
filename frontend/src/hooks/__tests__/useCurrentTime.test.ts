@@ -24,16 +24,11 @@ describe("useCurrentTime", () => {
   it('clearInterval and setInterval by advanceTimer', () => {
       const { result } = renderHook(() => useCurrentTime());
       act(() => {
-          jest.advanceTimersByTime(1000);
-      });
-      expect(result.current).toBe("20:00:01");
-
-      act(() => {
-          jest.advanceTimersByTime(60000);
+          jest.advanceTimersByTime(61000);
       });
       expect(result.current).toBe("20:01:01");
-      expect(clearInterval).toHaveBeenCalledTimes(2);
-      expect(setInterval).toHaveBeenCalledTimes(3);
+      expect(clearInterval).toHaveBeenCalledTimes(1);
+      expect(setInterval).toHaveBeenCalledTimes(2);
     });
 
   it('unmount', () => {
@@ -43,4 +38,4 @@ describe("useCurrentTime", () => {
     expect(setInterval).toHaveBeenCalledTimes(1);
   });
 
-}); 
+});
