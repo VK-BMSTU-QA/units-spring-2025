@@ -20,7 +20,7 @@ describe('test apply categories function', () => {
         expect(applyCategories(products, allCategories)).toEqual(products);
     });
 
-    it('should uses filter and return prosucts by categories', () => {
+    it('should uses filter and return products by categories', () => {
         expect(applyCategories(products, oneCategory)).toEqual([table]);
         expect(applyCategories(products, twoCategories)).toEqual([skirt, phone]);
     });

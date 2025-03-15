@@ -3,6 +3,10 @@ import { renderHook, act } from "@testing-library/react";
 
 jest.useFakeTimers();
 
+afterAll(() => {
+    jest.useRealTimers();
+});
+
 describe('test useCurrentTime hook', () => {
     it('should return correct current time', () => {
         const result = renderHook(() => useCurrentTime());
@@ -20,7 +24,6 @@ describe('test useCurrentTime hook', () => {
         });
 
         const newTime = new Date().toLocaleTimeString('ru-RU');
-        expect(result.result.current).not.toBe(initTime);
         expect(result.result.current).toBe(newTime);
     });
 

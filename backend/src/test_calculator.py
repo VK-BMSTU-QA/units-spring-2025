@@ -109,7 +109,6 @@ class TestCalculator(unittest.TestCase):
       self.assertRaises(TypeError, self.calculator.log, [], 2)
       self.assertRaises(TypeError, self.calculator.log, {}, 1)
       self.assertRaises(TypeError, self.calculator.log, None, 1)
-      #self.assertRaises(TypeError, self.calculator.log, True, 2)
 
    def test_log(self):
       self.assertEqual(self.calculator.log(8, 2), 3)
@@ -133,23 +132,23 @@ class TestCalculator(unittest.TestCase):
       self.assertEqual(self.calculator.sqrt(0.25), 0.5)
       self.assertEqual(self.calculator.sqrt(1e10), 1e5)
       self.assertEqual(self.calculator.sqrt(1e-10), 1e-5)
-      #self.assertRaises(ValueError, self.calculator.sqrt, -4)
+      self.assertAlmostEqual(self.calculator.sqrt(-4), 2j)
 
    def test_nth_root_input_types(self):
       self.assertRaises(TypeError, self.calculator.nth_root, "2", 2)
       self.assertRaises(TypeError, self.calculator.nth_root, [], 2)
       self.assertRaises(TypeError, self.calculator.nth_root, {}, 1)
-      self.assertRaises(TypeError, self.calculator.nth_root, None, 1)
-      #self.assertRaises(TypeError, self.calculator.nth_root, True, 1)   
+      self.assertRaises(TypeError, self.calculator.nth_root, None, 1)  
 
    def test_nth_root(self):
       self.assertEqual(self.calculator.nth_root(4, 2), 2)
       self.assertEqual(self.calculator.nth_root(0, 2), 0)
-      self.assertRaises(ZeroDivisionError, self.calculator.nth_root, 4, 0)
-      #self.assertEqual(self.calculator.nth_root(-8, 3), -2)
       self.assertEqual(self.calculator.nth_root(0.125, 3), 0.5)
-      #self.assertEqual(self.calculator.nth_root(1e10, 10), 10.0)
-      #self.assertRaises(ValueError, self.calculator.nth_root, -4, 2)
+      self.assertAlmostEqual(self.calculator.nth_root(16, 0.5), 256)
+      self.assertAlmostEqual(self.calculator.nth_root(16, -2), 0.25)
+      self.assertAlmostEqual(self.calculator.nth_root(-4, 2), 2j)
+      self.assertAlmostEqual(self.calculator.nth_root(1e10, 10), 10.0)
+      self.assertRaises(ZeroDivisionError, self.calculator.nth_root, 4, 0)
 
 
 if __name__ == "__main__":
