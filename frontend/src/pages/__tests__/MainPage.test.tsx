@@ -33,7 +33,7 @@ describe('Testing MainPage', () => {
     });
   });
 
-  it('return filtered products if categories selected', () => {
+  it('return filtered products if one category selected', () => {
     const mainPage = render(<MainPage />);
     const products: Product[] = useProducts();
     const electronicsCategories = mainPage.getAllByText('Электроника');
@@ -45,6 +45,29 @@ describe('Testing MainPage', () => {
     fireEvent.click(electronicsBadge);
     products.forEach((product) => {
       if (product.category === 'Электроника') {
+        expect(mainPage.getByText(product.name)).toBeInTheDocument();
+      } else {
+        expect(mainPage.queryByText(product.name)).not.toBeInTheDocument();
+      }
+    });
+  });
+  
+  it('return filtered products if multiple categories selected', () => {
+    const mainPage = render(<MainPage />);
+    const products: Product[] = useProducts();
+   
+    const categories: string[] = ['Электроника', 'Одежда']
+    categories.forEach((category) => {
+      const foundCategories = mainPage.getAllByText(category);
+      const badge = foundCategories.find(el => el.classList.contains('categories__badge'));
+      if (!badge) {
+        throw new Error(`Cant find category: ${category}`);
+      }
+      fireEvent.click(badge);
+    });
+
+    products.forEach((product) => {
+      if (categories.includes(product.category)) {
         expect(mainPage.getByText(product.name)).toBeInTheDocument();
       } else {
         expect(mainPage.queryByText(product.name)).not.toBeInTheDocument();
