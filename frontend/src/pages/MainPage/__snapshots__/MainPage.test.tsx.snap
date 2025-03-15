@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage test should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="main-page"
+  >
+    <h2
+      class="main-page__title"
+    >
+      VK Маркет
+    </h2>
+    <h3>
+      12:00:00
+    </h3>
+    <div
+      class="main-page__parameters"
+    >
+      <div>
+        <button>
+          Category1
+        </button>
+        <button>
+          Category2
+        </button>
+      </div>
+    </div>
+    <div>
+      Product1
+    </div>
+    <div>
+      Product2
+    </div>
+  </div>
+</DocumentFragment>
+`;
