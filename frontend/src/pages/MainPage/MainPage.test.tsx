@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MainPage } from './MainPage';
 import { useCurrentTime } from '../../hooks';
+import type { Product } from '../../types';
 
 afterEach(jest.clearAllMocks);
 const categories = ['Одежда', 'Для дома', 'Электроника'];
@@ -39,16 +40,24 @@ const products = [
         price: 7000,
         category: 'Электроника',
     },
-];
+] as Product[];
 
+jest.mock('../../hooks', () => {
+    return {
+        useCurrentTime: jest.fn(() => '1:00:00'),
+        useProducts: jest.fn(() => products)
+    }
+})
 
 describe('Main page test', () => {
-    afterEach(() => { jest.restoreAllMocks() });
-    it('should render correctly', () => {
-        const defTime = new Date(1, 1, 1, 1, 0, 0)
-        jest.spyOn(global, 'Date').mockImplementation(() => defTime);
-        const rendered = render(<MainPage />);
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
 
+    afterEach(() => { jest.restoreAllMocks() });
+
+    it('should render correctly', () => {
+        const rendered = render(<MainPage />);
         expect(rendered.asFragment()).toMatchSnapshot();
     });
 
