@@ -9,8 +9,7 @@ const FIXED_TIME = '00:00:00';
 jest.mock('../../hooks', () => {
     const originalModule = jest.requireActual('../../hooks');
     return {
-        ...originalModule, // <-- берем все реальные экспорты (включая useProducts)
-        // а useCurrentTime переопределяем на зафиксированное значение
+        ...originalModule,
         useCurrentTime: jest.fn(() => FIXED_TIME),
     };
 });
@@ -25,7 +24,6 @@ describe('test MainPage', () => {
 
     it('should display time from mock', () => {
         const mainPage = render(<MainPage />);
-        // проверяем, что на странице появилось FIXED_TIME
         expect(mainPage.getByText(FIXED_TIME)).toBeInTheDocument();
     });
 
