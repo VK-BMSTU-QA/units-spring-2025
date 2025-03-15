@@ -2,8 +2,15 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MainPage } from './MainPage';
+import { useProducts } from '../../hooks';
 
 afterEach(jest.clearAllMocks);
+
+const CURRENT_TIME = '00:00:00';
+
+jest.mock('../../hooks/useCurrentTime', () => ({
+    useCurrentTime: jest.fn(() => CURRENT_TIME),
+}));
 
 describe('MainPage test', () => {
     it('should render correctly', () => {
@@ -13,7 +20,7 @@ describe('MainPage test', () => {
     });
 
     it('should show output without filter', () => {
-        const rendered = render(<MainPage />);
+        render(<MainPage />);
 
         const categories = ['Одежда', 'Для дома', 'Электроника'];
         const productCategories = document.querySelectorAll('.product-card__category');
@@ -44,10 +51,8 @@ describe('MainPage test', () => {
     });
 
     it('should show correct time', () => {
-        jest.useFakeTimers().setSystemTime(new Date('2025-03-15T00:00:00'));
-    
         const rendered = render(<MainPage />);
     
-        expect(rendered.getByTestId("time").textContent).toBe("00:00:00");
+        expect(rendered.getByText(CURRENT_TIME).textContent).toBe("00:00:00");
     });
 });
