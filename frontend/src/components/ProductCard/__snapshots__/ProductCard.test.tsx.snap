@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductCard test should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="product-card"
+  >
+    <div
+      class="product-card__text"
+    >
+      <h2
+        class="product-card__name"
+      >
+        ProductCardName
+      </h2>
+      <div
+        class="product-card__description"
+      >
+        ProductCardDescription
+      </div>
+      <h1
+        class="product-card__price"
+      >
+        123 ₽
+      </h1>
+      <div
+        class="product-card__category"
+      >
+        Электроника
+      </div>
+    </div>
+    <img
+      alt="ProductCardName"
+      class="product-card__image"
+      src="/iphone.png"
+    />
+  </div>
+</DocumentFragment>
+`;
