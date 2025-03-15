@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage test should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-page"
+  >
+    <h2
+      class="main-page__title"
+    >
+      VK Маркет
+    </h2>
+    <h3>
+      12:00:00
+    </h3>
+    <div
+      class="main-page__parameters"
+    >
+      <div
+        data-testid="categories"
+      >
+        <button
+          data-testid="category-Электроника"
+        >
+          Электроника
+        </button>
+        <button
+          data-testid="category-Одежда"
+        >
+          Одежда
+        </button>
+        <button
+          data-testid="category-Для дома"
+        >
+          Для дома
+        </button>
+      </div>
+    </div>
+    <div
+      data-testid="product-card"
+    >
+      Product 1
+    </div>
+    <div
+      data-testid="product-card"
+    >
+      Product 2
+    </div>
+    <div
+      data-testid="product-card"
+    >
+      Product 3
+    </div>
+  </div>
+</DocumentFragment>
+`;
