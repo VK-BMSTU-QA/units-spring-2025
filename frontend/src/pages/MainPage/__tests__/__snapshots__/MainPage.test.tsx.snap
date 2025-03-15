@@ -17,108 +17,39 @@ exports[`MainPage test should match the snapshot 1`] = `
       class="main-page__parameters"
     >
       <div
-        class="categories"
+        data-testid="categories"
       >
-        <div
-          class="categories__badge"
-        >
-          Одежда
-        </div>
-        <div
-          class="categories__badge"
-        >
-          Для дома
-        </div>
-        <div
-          class="categories__badge"
+        <button
+          data-testid="category-Электроника"
         >
           Электроника
-        </div>
-      </div>
-    </div>
-    <div
-      class="product-card"
-    >
-      <div
-        class="product-card__text"
-      >
-        <h2
-          class="product-card__name"
-        >
-          Product 1
-        </h2>
-        <div
-          class="product-card__description"
-        >
-          Description 1
-        </div>
-        <h1
-          class="product-card__price"
-        >
-          100 ₽
-        </h1>
-        <div
-          class="product-card__category"
-        >
-          Электроника
-        </div>
-      </div>
-    </div>
-    <div
-      class="product-card"
-    >
-      <div
-        class="product-card__text"
-      >
-        <h2
-          class="product-card__name"
-        >
-          Product 2
-        </h2>
-        <div
-          class="product-card__description"
-        >
-          Description 2
-        </div>
-        <h1
-          class="product-card__price"
-        >
-          200 ₽
-        </h1>
-        <div
-          class="product-card__category"
+        </button>
+        <button
+          data-testid="category-Одежда"
         >
           Одежда
-        </div>
+        </button>
+        <button
+          data-testid="category-Для дома"
+        >
+          Для дома
+        </button>
       </div>
     </div>
     <div
-      class="product-card"
+      data-testid="product-card"
     >
-      <div
-        class="product-card__text"
-      >
-        <h2
-          class="product-card__name"
-        >
-          Product 3
-        </h2>
-        <div
-          class="product-card__description"
-        >
-          Description 3
-        </div>
-        <h1
-          class="product-card__price"
-        >
-          300 ₽
-        </h1>
-        <div
-          class="product-card__category"
-        >
-          Для дома
-        </div>
-      </div>
+      Product 1
+    </div>
+    <div
+      data-testid="product-card"
+    >
+      Product 2
+    </div>
+    <div
+      data-testid="product-card"
+    >
+      Product 3
     </div>
   </div>
 </DocumentFragment>

@@ -2,28 +2,32 @@ import { renderHook, act } from '@testing-library/react';
 import { useCurrentTime } from '../useCurrentTime';
 
 describe('useCurrentTime test', () => {
+    let toLocaleTimeStringMock: jest.SpyInstance;
+    let clearIntervalSpy: jest.SpyInstance;
+
     beforeAll(() => {
         jest.useFakeTimers();
+        toLocaleTimeStringMock = jest.spyOn(
+            Date.prototype,
+            'toLocaleTimeString'
+        );
     });
 
     afterAll(() => {
         jest.useRealTimers();
+        toLocaleTimeStringMock.mockRestore();
     });
 
     it('should return the initial time', () => {
-        jest.spyOn(Date.prototype, 'toLocaleTimeString').mockReturnValue(
-            '12:00:00'
-        );
+        toLocaleTimeStringMock.mockReturnValue('12:00:00');
 
         const { result } = renderHook(() => useCurrentTime());
 
         expect(result.current).toBe('12:00:00');
-
-        jest.spyOn(Date.prototype, 'toLocaleTimeString').mockRestore();
     });
 
     it('should update the time every second', () => {
-        jest.spyOn(Date.prototype, 'toLocaleTimeString')
+        toLocaleTimeStringMock
             .mockReturnValueOnce('12:00:00')
             .mockReturnValueOnce('12:00:01');
 
@@ -36,23 +40,17 @@ describe('useCurrentTime test', () => {
         });
 
         expect(result.current).toBe('12:00:01');
-
-        jest.spyOn(Date.prototype, 'toLocaleTimeString').mockRestore();
     });
 
     it('should clear the interval on unmount', () => {
-        const clearIntervalSpy = jest.spyOn(global, 'clearInterval');
-        jest.spyOn(Date.prototype, 'toLocaleTimeString').mockReturnValue(
-            '12:00:00'
-        );
+        toLocaleTimeStringMock.mockReturnValue('12:00:00');
+        clearIntervalSpy = jest.spyOn(global, 'clearInterval');
 
         const { unmount } = renderHook(() => useCurrentTime());
 
         unmount();
 
         expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
-
         clearIntervalSpy.mockRestore();
-        jest.spyOn(Date.prototype, 'toLocaleTimeString').mockRestore();
     });
 });

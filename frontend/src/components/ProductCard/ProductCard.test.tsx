@@ -35,10 +35,8 @@ describe('ProductCard test', () => {
 
     it('should call getPrice 1 time', () => {
         (getPrice as jest.Mock).mockReturnValue('999 $');
-        const productWithRubles: Product = {
-            ...product,
-        };
-        const { getByText } = render(<ProductCard {...productWithRubles} />);
+
+        const { getByText } = render(<ProductCard {...product} />);
         expect(getPrice).toHaveBeenCalledTimes(1);
         expect(getByText('999 $')).toBeInTheDocument();
     });
@@ -52,6 +50,15 @@ describe('ProductCard test', () => {
             <ProductCard {...productWithoutImage} />
         );
         expect(queryByAltText(product.name)).not.toBeInTheDocument();
+    });
+
+    it('should render image correctly if imgUrl is provided', () => {
+        const { getByAltText } = render(<ProductCard {...product} />);
+        const image = getByAltText(product.name);
+
+        expect(image).toBeInTheDocument();
+        expect(image).toHaveAttribute('src', product.imgUrl);
+        expect(image).toHaveAttribute('alt', product.name);
     });
 
     it('should render price correctly without priceSymbol', () => {
