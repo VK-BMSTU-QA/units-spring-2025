@@ -316,9 +316,13 @@ class TestCalculator(unittest.TestCase):
     def test_nth_root_string_base(self):
         self.assertRaises(TypeError, self.calculator.nth_root, 2, "1",)
 
-    def test_nth_root_bool_and_zero_base(self):
+    def test_nth_root_bool_and(self):
         self.assertRaises(ZeroDivisionError,
                           self.calculator.nth_root, 2, False)
+        
+    def test_nth_root_zero_base(self):
+        self.assertRaises(ZeroDivisionError,
+                          self.calculator.nth_root, 2, 0)
 
     def test_nth_root_zero_number(self):
         self.assertEqual(self.calculator.nth_root(0, 1/3), 0)
