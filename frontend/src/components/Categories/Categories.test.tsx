@@ -26,6 +26,48 @@ describe('Categories test', () => {
         );
     });
 
+    it('should add class for selected badges', () => {
+        const rendered = render(<Categories selectedCategories={['Одежда', 'Электроника']} />);
+
+        expect(rendered.getByText('Одежда')).toHaveClass(
+          'categories__badge_selected'
+        );
+        expect(rendered.getByText('Электроника')).toHaveClass(
+          'categories__badge_selected'
+        );
+        expect(rendered.getByText('Для дома')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+    });
+
+    it('should add class for selected badge (zero)', () => {
+        const rendered = render(<Categories selectedCategories={[]} />);
+
+        expect(rendered.getByText('Одежда')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+        expect(rendered.getByText('Электроника')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+        expect(rendered.getByText('Для дома')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+    });
+
+    it('should add class for selected badge (none selected)', () => {
+        const rendered = render(<Categories selectedCategories={[]} />);
+
+        expect(rendered.getByText('Одежда')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+        expect(rendered.getByText('Электроника')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+        expect(rendered.getByText('Для дома')).not.toHaveClass(
+          'categories__badge_selected'
+        );
+    });
+
     it('should call callback when category click', () => {
         const onCategoryClick = jest.fn();
         const rendered = render(
@@ -38,5 +80,7 @@ describe('Categories test', () => {
         expect(onCategoryClick).toHaveBeenCalledTimes(0);
         fireEvent.click(rendered.getByText('Одежда'));
         expect(onCategoryClick).toHaveBeenCalledTimes(1);
+        fireEvent.click(rendered.getByText('Электроника'));
+        expect(onCategoryClick).toHaveBeenCalledTimes(2);
     });
 });

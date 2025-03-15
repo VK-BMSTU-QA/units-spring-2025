@@ -18,6 +18,7 @@ export default {
         'src/utils/**/!(index).ts',
         'src/components/**/*.tsx',
         'src/hooks/!(index|useProducts).ts',
+        'src/hooks/!(index|useProducts).tsx',
     ],
     coverageThreshold: {
         global: {
