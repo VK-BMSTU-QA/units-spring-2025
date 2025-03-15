@@ -46,7 +46,26 @@ describe('Testing MainPage', () => {
     products.forEach((product) => {
       if (product.category === 'Электроника') {
         expect(mainPage.getByText(product.name)).toBeInTheDocument();
+      } else {
+        expect(mainPage.queryByText(product.name)).not.toBeInTheDocument();
       }
+    });
+  });
+
+  it('return filtered products if categories unselected', () => {
+    const mainPage = render(<MainPage />);
+    const products: Product[] = useProducts();
+    const electronicsCategories = mainPage.getAllByText('Электроника');
+    const electronicsBadge = electronicsCategories.find(el => el.classList.contains('categories__badge'));
+    if (!electronicsBadge) {
+      throw new Error('Cant find category: "Электроника"');
+    }
+  
+    fireEvent.click(electronicsBadge);
+    fireEvent.click(electronicsBadge);
+    
+    products.forEach((product) => {
+      expect(mainPage.getByText(product.name)).toBeInTheDocument();
     });
   });
 });
