@@ -4,20 +4,31 @@ import '@testing-library/jest-dom';
 import { Product } from '../../types';
 import { useProducts } from '../../hooks';
 
+const FIXED_TIME = '00:00:00';
+
+jest.mock('../../hooks', () => {
+    const originalModule = jest.requireActual('../../hooks');
+    return {
+        ...originalModule, // <-- берем все реальные экспорты (включая useProducts)
+        // а useCurrentTime переопределяем на зафиксированное значение
+        useCurrentTime: jest.fn(() => FIXED_TIME),
+    };
+});
+
+afterEach(jest.clearAllMocks);
+
 describe('test MainPage', () => {
-    beforeAll(() => {
-        jest.useFakeTimers();
-        jest.setSystemTime(new Date('2025-03-14T00:00:00Z'));
-    });
-
-    afterAll(() => {
-        jest.useRealTimers();
-    });
-
     it('should return render snapshot', () => {
-        const r = render(<MainPage />);
-        expect(r.asFragment()).toMatchSnapshot();
+        const mainPage = render(<MainPage />);
+        expect(mainPage.asFragment()).toMatchSnapshot();
     });
+
+    it('should display time from mock', () => {
+        const mainPage = render(<MainPage />);
+        // проверяем, что на странице появилось FIXED_TIME
+        expect(mainPage.getByText(FIXED_TIME)).toBeInTheDocument();
+    });
+
     it('should return filtered products if categories selected', () => {
         const mainPage = render(<MainPage />);
         const products: Product[] = useProducts();
@@ -25,6 +36,7 @@ describe('test MainPage', () => {
         const electronicsBadge = electronicsCategories.find((el) =>
             el.classList.contains('categories__badge')
         );
+
         if (!electronicsBadge) {
             throw new Error('Cant find category: "Электроника"');
         }
