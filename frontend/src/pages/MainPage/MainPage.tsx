@@ -23,7 +23,7 @@ export const MainPage = () => {
     return (
         <div className="main-page">
             <h2 className="main-page__title">VK Маркет</h2>
-            <h3>{currentTime}</h3>
+            <h3 data-testid="time">{currentTime}</h3>
             <div className="main-page__parameters">
                 <Categories
                     selectedCategories={selectedCategories}

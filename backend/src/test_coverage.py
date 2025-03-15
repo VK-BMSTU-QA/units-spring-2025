@@ -1,5 +1,5 @@
 import unittest
-from coverage_foo import MyClass
+from src.coverage_foo import MyClass
 import math
 
 

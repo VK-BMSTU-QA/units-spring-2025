@@ -19,6 +19,7 @@ export const Categories: FC<CategoriesProps> = ({
     <div className="categories">
         {allFilters.map((filter) => (
             <div
+                data-testid={filter}
                 key={filter}
                 onClick={() => onCategoryClick?.(filter)}
                 className={cn('categories__badge', {
