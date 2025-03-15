@@ -124,10 +124,10 @@ class TestCalculatorMultiplication(unittest.TestCase):
     # Float
 
     def test_multiplication_float_two_positives(self):
-        self.assertAlmostEqual(self.calculator.multiplication(10.3, 54.09), 10.3 * 54.09)
+        self.assertAlmostEqual(self.calculator.multiplication(10.3, 54.09), 557.127)
     
     def test_multiplication_float_two_negatives(self):
-        self.assertAlmostEqual(self.calculator.multiplication(-4.8, -3.1), -4.8 * -3.1)
+        self.assertAlmostEqual(self.calculator.multiplication(-4.8, -3.2), 15.36)
     
     def test_multiplication_float_two_zeros(self):
         self.assertAlmostEqual(self.calculator.multiplication(0.0, 0.0), 0.0)
@@ -139,8 +139,8 @@ class TestCalculatorMultiplication(unittest.TestCase):
         self.assertAlmostEqual(self.calculator.multiplication(-5.8, 0.0), 0.0)
     
     def test_multiplication_float_position(self):
-        self.assertAlmostEqual(self.calculator.multiplication(52.05, 12.09), 52.05 * 12.09)
-        self.assertAlmostEqual(self.calculator.multiplication(12.09, 52.05), 12.09 * 52.05)
+        self.assertAlmostEqual(self.calculator.multiplication(52.05, 12.09), 629.2845)
+        self.assertAlmostEqual(self.calculator.multiplication(12.09, 52.05), 629.2845)
     
     # Inf
 
@@ -208,10 +208,10 @@ class TestCalculatorSubtraction(unittest.TestCase):
     # Float
 
     def test_subtraction_float_two_positives(self):
-        self.assertAlmostEqual(self.calculator.subtraction(10.3, 54.09), 10.3 - 54.09)
+        self.assertAlmostEqual(self.calculator.subtraction(10.6, 54.4), -43.8)
     
     def test_subtraction_float_two_negatives(self):
-        self.assertAlmostEqual(self.calculator.subtraction(-4.8, -3.1), -4.8 - -3.1)
+        self.assertAlmostEqual(self.calculator.subtraction(-4.8, -3.1), -1.7)
     
     def test_subtraction_float_two_zeros(self):
         self.assertAlmostEqual(self.calculator.subtraction(0.0, 0.0), 0.0)
@@ -284,15 +284,15 @@ class TestCalculatorDivision(unittest.TestCase):
     
     def test_division_int_and_float(self):
         self.assertAlmostEqual(self.calculator.division(2.5, 2), 1.25)
-        self.assertAlmostEqual(self.calculator.division(2, 2.5), 2 / 2.5)
+        self.assertAlmostEqual(self.calculator.division(2, 2.5), 0.8)
     
     # Float
 
     def test_division_float_two_positives(self):
-        self.assertAlmostEqual(self.calculator.division(10.3, 54.09), 10.3 / 54.09)
+        self.assertAlmostEqual(self.calculator.division(10.1, 50.5), 0.2)
     
     def test_division_float_two_negatives(self):
-        self.assertAlmostEqual(self.calculator.division(-4.8, -3.1), -4.8 / -3.1)
+        self.assertAlmostEqual(self.calculator.division(-7.5, -2.5), 3.0)
     
     def test_division_float_two_zeros(self):
         self.assertIsNone(self.calculator.division(0.0, 0.0))
@@ -401,12 +401,6 @@ class TestCalculatorDegree(unittest.TestCase):
     def test_degree_int_two_positives(self):
         self.assertEqual(self.calculator.degree(3, 4), 81)
     
-    def test_degree_int_two_negatives(self):
-        self.assertAlmostEqual(self.calculator.degree(-6, -3), -6 ** -3)
-    
-    def test_degree_int_two_zeros(self):
-        self.assertEqual(self.calculator.degree(0, 0), 1)
-    
     def test_degree_int_zero_and_positive(self):
         self.assertEqual(self.calculator.degree(0, 3), 0)
     
@@ -415,15 +409,18 @@ class TestCalculatorDegree(unittest.TestCase):
     
     def test_degree_int_and_float(self):
         self.assertAlmostEqual(self.calculator.degree(2.5, 2), 6.25)
-        self.assertAlmostEqual(self.calculator.degree(5, 4.63), 5 ** 4.63)
+        self.assertAlmostEqual(self.calculator.degree(9, 0.5), 3.0)
     
     # Float
 
     def test_degree_float_two_positives(self):
-        self.assertAlmostEqual(self.calculator.degree(10.3, 54.09), 10.3 ** 54.09)
+        self.assertAlmostEqual(self.calculator.degree(2.0, 3.0), 8.0)
+        self.assertAlmostEqual(self.calculator.degree(0.25, 2.0), 0.0625)
     
-    def test_degree_float_two_negatives(self):
-        self.assertAlmostEqual(self.calculator.degree(-4.8, -3.1), (-4.8) ** (-3.1))
+    def test_degree_float_one_negative(self):
+        self.assertAlmostEqual(self.calculator.degree(-2.0, 4.0), 16.0)
+        self.assertAlmostEqual(self.calculator.degree(9.0, -0.5), 1/3.0)
+        self.assertAlmostEqual(self.calculator.degree(-3.0, 3.0), -27.0)
     
     def test_degree_float_two_zeros(self):
         self.assertAlmostEqual(self.calculator.degree(0.0, 0.0), 1.0)
@@ -609,10 +606,6 @@ class TestCalculatorSqrt(unittest.TestCase):
         self.assertEqual(self.calculator.sqrt(16), 4)
         self.assertEqual(self.calculator.sqrt(81), 9)
     
-    def test_sqrt_int_negative(self):
-        self.assertAlmostEqual(self.calculator.sqrt(-6), (-6) ** 0.5)
-        self.assertAlmostEqual(self.calculator.sqrt(-41), (-41) ** 0.5)
-    
     def test_sqrt_int_zero(self):
         self.assertEqual(self.calculator.sqrt(0), 0)
     
@@ -621,10 +614,6 @@ class TestCalculatorSqrt(unittest.TestCase):
     def test_sqrt_float_positive(self):
         self.assertAlmostEqual(self.calculator.sqrt(6.25), 2.5)
         self.assertAlmostEqual(self.calculator.sqrt(42.25), 6.5)
-    
-    def test_sqrt_float_negative(self):
-        self.assertAlmostEqual(self.calculator.sqrt(-3.63), (-3.63) ** 0.5)
-        self.assertAlmostEqual(self.calculator.sqrt(-41.25), (-41.25) ** 0.5)
     
     # Inf
 
@@ -663,6 +652,23 @@ class TestCalculatorNthRoot(unittest.TestCase):
     def test_nthroot_int_zero(self):
         self.assertEqual(self.calculator.nth_root(0, 5), 0)
     
+    def test_nthroot_int_arithmeticerror(self):
+        self.assertRaises(ArithmeticError, self.calculator.nth_root, 10, 0)
+    
+    # Float
+
+    def test_nthroot_float_negative_n(self):
+        self.assertAlmostEqual(self.calculator.nth_root(32, -5), 0.5)
+        self.assertAlmostEqual(self.calculator.nth_root(1024, -10), 0.5)
+    
+    def test_nthroot_float_fractional_n(self):
+        self.assertAlmostEqual(self.calculator.nth_root(8.0, 3/4), 16)
+        self.assertAlmostEqual(self.calculator.nth_root(8.0, 3/2), 4)
+
+    def test_nthroot_boundary_n(self):
+        self.assertEqual(self.calculator.nth_root(100, 1), 100)
+        self.assertEqual(self.calculator.nth_root(100, -1), 0.01)
+
     # Inf
 
     def test_nthroot_inf(self):

@@ -35,3 +35,11 @@ export const productWithImageAndPriceSymbol: Product = {
     category: 'Электроника',
     imgUrl: '/iphone.png',
 };
+
+export const productWithoutImage: Product = {
+    id: 5,
+    name: 'Принтер',
+    description: 'Незаменимая вещь для студента',
+    price: 7000,
+    category: 'Электроника',
+};

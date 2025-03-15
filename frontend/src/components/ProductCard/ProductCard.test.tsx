@@ -2,9 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ProductCard } from './ProductCard';
-import { productWithImage, productWithImageAndPriceSymbol, productWithPriceSymbol, simpleProduct } from '../../types/mocks/Products';
+import { productWithImage, productWithImageAndPriceSymbol, productWithoutImage, productWithPriceSymbol, simpleProduct } from '../../types/mocks/Products';
 import { getPrice } from '../../utils';
-
 
 describe('test product card', () => {
     it('should render product correctly', () => {    
@@ -13,6 +12,7 @@ describe('test product card', () => {
         expect(rendered.getByText(simpleProduct.name)).toBeInTheDocument();
         expect(rendered.getByText(simpleProduct.description)).toBeInTheDocument();
         expect(rendered.getByText(simpleProduct.category)).toBeInTheDocument();
+
         expect(
             rendered.getByText(
                 getPrice(simpleProduct.price, simpleProduct.priceSymbol),
@@ -25,8 +25,11 @@ describe('test product card', () => {
 
     it('should render product with image correctly', () => {
         const rendered = render(<ProductCard {...productWithImage} />)
-        
-        expect(rendered.queryByRole('img')).toBeInTheDocument();
+        const image = rendered.getByRole('img');
+
+        expect(image).toBeInTheDocument();
+        expect(image).toHaveAttribute('src', productWithImage.imgUrl);
+        expect(image).toHaveAttribute('alt', productWithImage.name);
     });
 
     it('should render product with price symbol correctly', () => {
@@ -42,13 +45,23 @@ describe('test product card', () => {
 
     it('should render product with image and price symbol correctly', () => {
         const rendered = render(<ProductCard {...productWithImageAndPriceSymbol} />)
-        
-        expect(rendered.queryByRole('img')).toBeInTheDocument();
+        const image = rendered.getByRole('img');
+
+        expect(image).toBeInTheDocument();
+        expect(image).toHaveAttribute('src', productWithImageAndPriceSymbol.imgUrl);
+        expect(image).toHaveAttribute('alt', productWithImageAndPriceSymbol.name);
+
         expect(
             rendered.getByText(
                 getPrice(productWithImageAndPriceSymbol.price, productWithImageAndPriceSymbol.priceSymbol),
                 { trim: false, collapseWhitespace: false },
             )
         ).toBeInTheDocument();
+    });
+
+    it('should render product without image correctly', () => {
+        const rendered = render(<ProductCard {...productWithoutImage} />);
+
+        expect(rendered.queryByRole('img')).not.toBeInTheDocument();
     });
 });
