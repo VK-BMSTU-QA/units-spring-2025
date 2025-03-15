@@ -11,7 +11,7 @@ exports[`test MainPage should return render snapshot 1`] = `
       VK Маркет
     </h2>
     <h3>
-      03:00:00
+      18:20:21
     </h3>
     <div
       class="main-page__parameters"
