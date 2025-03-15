@@ -2,19 +2,44 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
 import { MainPage } from './MainPage';
+import { Category, Product } from '../../types';
 
-beforeEach(() => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2025-03-15T01:00:00'));
-});
+jest.mock('../../hooks', () => ({
+    useProducts: jest.fn(() => [
+        { id: 1, name: 'Принтер', category: 'Электроника' } as Product,
+        { id: 2, name: 'Костюм гуся', category: 'Одежда' } as Product,
+        { id: 3, name: 'Настольная лампа', category: 'Для дома' } as Product,
+    ]),
+    useCurrentTime: jest.fn(() => '01:00:00'),
+}));
 
-afterEach(jest.useRealTimers);
+jest.mock('../../utils', () => ({
+    getPrice: jest.fn(),
+    applyCategories: (products: Product[], categories: Category[]) =>
+        categories.length ? products.filter((product: Product) => categories.includes(product.category)) : products,
+    updateCategories: (currentCategories: Category[], changedCategories: Category) =>
+        currentCategories.includes(changedCategories) ? currentCategories.filter((c: Category) => c !== changedCategories) : [...currentCategories, changedCategories],
+}));
 
 describe('MainPage test', () => {
     it('should render correctly', () => {
         const rendered = render(<MainPage />);
 
         expect(rendered.asFragment()).toMatchSnapshot();
+    });
+
+    it('should display current time', () => {
+        const rendered = render(<MainPage />);
+
+        expect(rendered.getByText('01:00:00')).toBeInTheDocument();
+    });
+
+    it('should display all categories', () => {
+        const rendered = render(<MainPage />);
+
+        expect(rendered.getAllByText('Электроника')).toHaveLength(2);
+        expect(rendered.getAllByText('Для дома')).toHaveLength(2);
+        expect(rendered.getAllByText('Одежда')).toHaveLength(2);
     });
 
     it('should display product cards with one selected category', () => {

@@ -16,13 +16,13 @@ beforeEach(() => {
 afterEach(jest.useRealTimers);
 
 describe('UseCurrentTime hook test', () => {
-    it('should return corret current time', () => {
+    it('should return correct current time', () => {
         const component = render(<TestComponent />);
 
         expect(component.getByText('01:00:00')).toBeInTheDocument();
     })
 
-    it('should return corret current time every second', () => {
+    it('should return correct current time every second', () => {
         const component = render(<TestComponent />);
 
         act(() => {

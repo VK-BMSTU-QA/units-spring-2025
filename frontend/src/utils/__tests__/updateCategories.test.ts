@@ -17,4 +17,12 @@ describe('test update categories function', () => {
 
         expect(updateCategories(currentCategories, changedCategories)).toStrictEqual(expectedCategories);
     })
+
+    it('should exclude changed categories from current categories even if there is only one current category', () => {
+        const currentCategories: Category[] = ['Для дома'];
+        const changedCategories: Category = 'Для дома';
+        const expectedCategories: Category[] = [];
+
+        expect(updateCategories(currentCategories, changedCategories)).toStrictEqual(expectedCategories);
+    })
 });

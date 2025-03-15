@@ -4,8 +4,11 @@ import { render } from '@testing-library/react';
 import { ProductCard } from "./ProductCard";
 import { Category, PriceSymbol } from "../../types";
 
-afterEach(jest.clearAllMocks);
+jest.mock('../../utils', () => ({
+    getPrice: jest.fn(),
+}));
 
+afterEach(jest.clearAllMocks);
 
 describe('ProductCard test', () => {
     const props = {
