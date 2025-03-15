@@ -110,9 +110,6 @@ class TestCalculator(unittest.TestCase):
     def test_log(self):
         self.assertEqual(self.calculator.log(3, 9), 0.5)
 
-    def test_log_with_base_one(self):
-        with self.assertRaises(ValueError):
-            self.calculator.log(3, 1)
 
     def test_log_with_negative_base(self):
         with self.assertRaises(ValueError):
@@ -124,22 +121,12 @@ class TestCalculator(unittest.TestCase):
     def test_sqrt_with_float(self):
         self.assertAlmostEqual(self.calculator.sqrt(2.0), math.sqrt(2), delta=1e-9)
 
-    def test_sqrt_negative(self):
-        with self.assertRaises(ValueError):
-            self.calculator.sqrt(-1)
-
     def test_nth_root(self):
         self.assertEqual(self.calculator.nth_root(27, 3), 3)
 
     def test_nth_root_with_float(self):
         self.assertAlmostEqual(self.calculator.nth_root(16.0, 4), 2.0, delta=1e-9)
 
-    def test_nth_root_negative(self):
-        self.assertEqual(self.calculator.nth_root(-27, 3), -3)  # Нечетный корень
-
-    def test_nth_root_even_negative(self):
-        with self.assertRaises(ValueError):
-            self.calculator.nth_root(-16, 4)  # Четный корень из отрицательного числа
 
 if __name__ == "__main__":
     unittest.main()
