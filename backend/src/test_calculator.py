@@ -475,6 +475,14 @@ class TestCalculator(unittest.TestCase):
     def test_nth_root_positive_float(self):
         self.assertAlmostEqual(self.calculator.nth_root(2.5, 2), math.sqrt(2.5))
         self.assertAlmostEqual(self.calculator.nth_root(27.0, 3), math.pow(27.0, 1/3))
+    
+    def test_nth_root_negative_power(self):
+        self.assertAlmostEqual(self.calculator.nth_root(16, -2), math.pow(16, -1/2))
+        self.assertAlmostEqual(self.calculator.nth_root(27, -3), math.pow(27, -1/3))
+        
+    def test_nth_root_float_power(self):
+        self.assertAlmostEqual(self.calculator.nth_root(27, 2.5), math.pow(27, 1/2.5))
+        self.assertAlmostEqual(self.calculator.nth_root(64.5, -3.3), math.pow(64.5, -1/3.3))
 
     def test_nth_root_zero(self):
         self.assertEqual(self.calculator.nth_root(0, 2), 0)
