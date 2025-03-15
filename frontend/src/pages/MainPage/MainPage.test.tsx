@@ -128,7 +128,7 @@ describe('MainPage time test', () => {
 
         const rendered = render(<MainPage></MainPage>);
         expect(
-            rendered.getByText(mockDate.toLocaleTimeString())
+            rendered.getByText(mockDate.toLocaleTimeString('ru-RU'))
         ).toBeInTheDocument();
     });
 
@@ -142,7 +142,7 @@ describe('MainPage time test', () => {
             jest.advanceTimersByTime(5000);
         });
         expect(
-            rendered.getByText(mockDate.toLocaleTimeString())
+            rendered.getByText(mockDate.toLocaleTimeString('ru-RU'))
         ).toBeInTheDocument();
     });
 });

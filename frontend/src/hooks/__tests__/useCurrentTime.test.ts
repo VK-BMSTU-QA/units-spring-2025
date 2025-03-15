@@ -7,7 +7,7 @@ describe('useCurrentTime test', () => {
         jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
 
         const { result } = renderHook(() => useCurrentTime());
-        expect(result.current).toBe(mockDate.toLocaleTimeString());
+        expect(result.current).toBe(mockDate.toLocaleTimeString('ru-RU'));
 
         jest.restoreAllMocks();
     });
@@ -22,7 +22,7 @@ describe('useCurrentTime test', () => {
         act(() => {
             jest.advanceTimersByTime(5000);
         });
-        expect(hook.result.current).toBe(mockDate.toLocaleTimeString());
+        expect(hook.result.current).toBe(mockDate.toLocaleTimeString('ru-RU'));
 
         jest.useRealTimers();
         jest.restoreAllMocks();
