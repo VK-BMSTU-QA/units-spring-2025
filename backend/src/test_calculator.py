@@ -100,6 +100,7 @@ class TestCalculator(unittest.TestCase):
 
     def test_sqrt(self):
         self.assertEqual(self.calculator.sqrt(9), 3)
+        self.assertAlmostEqual(self.calculator.sqrt(-4), 2j)
 
     def test_sqrt_complex(self):
         self.assertEqual(self.calculator.sqrt(3 + 4j), 2 + 1j)
@@ -111,6 +112,7 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calculator.nth_root(27, 3), 3)
         self.assertEqual(self.calculator.nth_root(2, 0.5), 4)
         self.assertEqual(self.calculator.nth_root(2, -1), 0.5)
+        self.assertAlmostEqual(self.calculator.nth_root(-8, 3), 1 + 1.7320508j)
         self.assertRaises(ZeroDivisionError, self.calculator.nth_root, 2, 0)
         self.assertRaises(ZeroDivisionError, self.calculator.nth_root, 0, -2)
 
