@@ -37,3 +37,4 @@ describe('UseCurrentTime hook test', () => {
         expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
     });
 });
+

@@ -1,6 +1,30 @@
 import type { Category, Product } from '../../types';
 import { applyCategories } from '../applyCategories';
 
+const iPhone: Product = {
+    id: 1,
+    name: 'IPhone 14 Pro',
+    description: 'Latest iphone, buy it now',
+    price: 999,
+    category: 'Электроника',
+};
+
+const gooseSuit: Product = {
+    id: 2,
+    name: 'Костюм гуся',
+    description: 'Запускаем гуся, работяги',
+    price: 1000,
+    category: 'Одежда',
+};
+
+const deskLamp: Product = {
+    id: 3,
+    name: 'Настольная лампа',
+    description: 'Говорят, что ее использовали в pixar',
+    price: 699,
+    category: 'Для дома',
+};
+
 interface TestCase {
     name: string;
     input: {
@@ -14,74 +38,15 @@ const testCases: TestCase[] = [
     {
         name: 'should return all products if given empty categories',
         input: {
-            products: [
-                {
-                    id: 1,
-                    name: 'IPhone 14 Pro',
-                    description: 'Latest iphone, buy it now',
-                    price: 999,
-                    category: 'Электроника',
-                },
-                {
-                    id: 2,
-                    name: 'Костюм гуся',
-                    description: 'Запускаем гуся, работяги',
-                    price: 1000,
-                    category: 'Одежда',
-                },
-                {
-                    id: 3,
-                    name: 'Настольная лампа',
-                    description: 'Говорят, что ее использовали в pixar',
-                    price: 699,
-                    category: 'Для дома',
-                },
-            ],
+            products: [iPhone, gooseSuit, deskLamp],
             categories: [],
         },
-        expectedOutput: [
-            {
-                id: 1,
-                name: 'IPhone 14 Pro',
-                description: 'Latest iphone, buy it now',
-                price: 999,
-                category: 'Электроника',
-            },
-            {
-                id: 2,
-                name: 'Костюм гуся',
-                description: 'Запускаем гуся, работяги',
-                price: 1000,
-                category: 'Одежда',
-            },
-            {
-                id: 3,
-                name: 'Настольная лампа',
-                description: 'Говорят, что ее использовали в pixar',
-                price: 699,
-                category: 'Для дома',
-            },
-        ],
+        expectedOutput: [iPhone, gooseSuit, deskLamp],
     },
     {
         name: 'should return empty array if given unused categories',
         input: {
-            products: [
-                {
-                    id: 1,
-                    name: 'IPhone 14 Pro',
-                    description: 'Latest iphone, buy it now',
-                    price: 999,
-                    category: 'Электроника',
-                },
-                {
-                    id: 2,
-                    name: 'Костюм гуся',
-                    description: 'Запускаем гуся, работяги',
-                    price: 1000,
-                    category: 'Одежда',
-                },
-            ],
+            products: [iPhone, gooseSuit],
             categories: ['Для дома'],
         },
         expectedOutput: [],
@@ -89,47 +54,10 @@ const testCases: TestCase[] = [
     {
         name: 'should return correct products if given used categories',
         input: {
-            products: [
-                {
-                    id: 1,
-                    name: 'IPhone 14 Pro',
-                    description: 'Latest iphone, buy it now',
-                    price: 999,
-                    category: 'Электроника',
-                },
-                {
-                    id: 2,
-                    name: 'Костюм гуся',
-                    description: 'Запускаем гуся, работяги',
-                    price: 1000,
-                    category: 'Одежда',
-                },
-                {
-                    id: 3,
-                    name: 'Настольная лампа',
-                    description: 'Говорят, что ее использовали в pixar',
-                    price: 699,
-                    category: 'Для дома',
-                },
-            ],
+            products: [iPhone, gooseSuit, deskLamp],
             categories: ['Электроника', 'Одежда'],
         },
-        expectedOutput: [
-            {
-                id: 1,
-                name: 'IPhone 14 Pro',
-                description: 'Latest iphone, buy it now',
-                price: 999,
-                category: 'Электроника',
-            },
-            {
-                id: 2,
-                name: 'Костюм гуся',
-                description: 'Запускаем гуся, работяги',
-                price: 1000,
-                category: 'Одежда',
-            },
-        ],
+        expectedOutput: [iPhone, gooseSuit],
     },
 ];
 
@@ -142,3 +70,4 @@ describe('test apply categories function', () => {
         });
     });
 });
+

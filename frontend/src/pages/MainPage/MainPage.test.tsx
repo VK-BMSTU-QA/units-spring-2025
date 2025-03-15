@@ -90,3 +90,4 @@ describe('MainPage test', () => {
         expect(applyCategories).toHaveBeenCalledTimes(2);
     });
 });
+

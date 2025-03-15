@@ -68,3 +68,4 @@ describe('ProductCard test', () => {
         expect(rendered.queryByAltText(product.name)).toBeInTheDocument();
     });
 });
+
