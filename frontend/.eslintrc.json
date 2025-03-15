@@ -31,11 +31,17 @@
       "single"
     ],
     "prettier/prettier": [
-      "error"
-      // {
-      //   "singleQuote": true,
-      //   "parser": "flow"
-      // }
+      "error",
+      {
+        "usePrettierrc": false
+      },
+      {
+        "singleQuote": true,
+        "parser": "flow"
+      },
+      {
+        "endOfLine": "lf"
+      }
     ]
   }
 }
