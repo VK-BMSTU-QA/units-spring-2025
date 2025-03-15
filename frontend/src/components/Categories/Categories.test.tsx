@@ -10,7 +10,7 @@ describe('Categories test', () => {
         const rendered = render(<Categories selectedCategories={[]} />);
 
         expect(rendered.asFragment()).toMatchSnapshot();
-    });
+    }); 
 
     it('should add class for selected badge', () => {
         const rendered = render(<Categories selectedCategories={['Одежда']} />);
