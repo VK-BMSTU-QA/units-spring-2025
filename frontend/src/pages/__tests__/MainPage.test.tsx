@@ -4,13 +4,35 @@ import '@testing-library/jest-dom';
 import { Product } from '../../types';
 import { useProducts } from '../../hooks';
 
-const FIXED_TIME = '00:00:00';
-
 jest.mock('../../hooks', () => {
     const originalModule = jest.requireActual('../../hooks');
     return {
         ...originalModule,
-        useCurrentTime: jest.fn(() => FIXED_TIME),
+        useCurrentTime: jest.fn(() => '00:00:00'),
+    };
+});
+
+jest.mock('../../components', () => {
+    const actual = jest.requireActual('../../components');
+    return {
+        ...actual,
+        Categories: ({
+            onCategoryClick,
+        }: {
+            onCategoryClick: (cat: string) => void;
+        }) => {
+            return (
+                <div data-testid="mocked-categories">
+                    <span
+                        data-testid="electronics-badge"
+                        className="categories__badge"
+                        onClick={() => onCategoryClick('Электроника')}
+                    >
+                        Электроника
+                    </span>
+                </div>
+            );
+        },
     };
 });
 
@@ -24,21 +46,14 @@ describe('test MainPage', () => {
 
     it('should display time from mock', () => {
         const mainPage = render(<MainPage />);
-        expect(mainPage.getByText(FIXED_TIME)).toBeInTheDocument();
+        expect(mainPage.getByText('00:00:00')).toBeInTheDocument();
     });
 
     it('should return filtered products if categories selected', () => {
         const mainPage = render(<MainPage />);
         const products: Product[] = useProducts();
-        const electronicsCategories = mainPage.getAllByText('Электроника');
-        const electronicsBadge = electronicsCategories.find((el) =>
-            el.classList.contains('categories__badge')
-        );
-
-        if (!electronicsBadge) {
-            throw new Error('Cant find category: "Электроника"');
-        }
-
+        const electronicsBadge = mainPage.getByTestId('electronics-badge');
+        expect(electronicsBadge).toBeInTheDocument();
         fireEvent.click(electronicsBadge);
         products.forEach((product) => {
             if (product.category === 'Электроника') {

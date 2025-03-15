@@ -17,23 +17,14 @@ exports[`test MainPage should return render snapshot 1`] = `
       class="main-page__parameters"
     >
       <div
-        class="categories"
+        data-testid="mocked-categories"
       >
-        <div
+        <span
           class="categories__badge"
-        >
-          Одежда
-        </div>
-        <div
-          class="categories__badge"
-        >
-          Для дома
-        </div>
-        <div
-          class="categories__badge"
+          data-testid="electronics-badge"
         >
           Электроника
-        </div>
+        </span>
       </div>
     </div>
     <div
