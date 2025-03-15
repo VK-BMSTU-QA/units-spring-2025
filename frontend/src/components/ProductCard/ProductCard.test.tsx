@@ -5,7 +5,7 @@ import { ProductCard } from "./ProductCard";
 import { Category, PriceSymbol } from "../../types";
 
 jest.mock('../../utils', () => ({
-    getPrice: jest.fn(),
+    getPrice: (value: number, symbol: PriceSymbol = '₽') => `${value.toLocaleString('ru-RU')} ${symbol}`,
 }));
 
 afterEach(jest.clearAllMocks);
