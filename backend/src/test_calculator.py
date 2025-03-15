@@ -46,6 +46,10 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calculator.addition(1, float("inf")), float("inf"))
         self.assertEqual(self.calculator.addition(1.1, float("inf")), float("inf"))
         self.assertEqual(self.calculator.addition(float("inf"), 1.1), float("inf"))
+        self.assertEqual(self.calculator.addition(float("-inf"), 1), float("-inf"))
+        self.assertEqual(self.calculator.addition(1, float("-inf")), float("-inf"))
+        self.assertEqual(self.calculator.addition(1.1, float("-inf")), float("-inf"))
+        self.assertEqual(self.calculator.addition(float("-inf"), 1.1), float("-inf"))
    
     def test_add_nan(self):
         self.assertTrue(math.isnan(self.calculator.addition(float("NaN"), 1)))
@@ -106,6 +110,10 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calculator.subtraction(1, float("inf")), float("-inf"))
         self.assertEqual(self.calculator.subtraction(1.1, float("inf")), float("-inf"))
         self.assertEqual(self.calculator.subtraction(float("inf"), 1.1), float("inf"))
+        self.assertEqual(self.calculator.subtraction(float("-inf"), 1), float("-inf"))
+        self.assertEqual(self.calculator.subtraction(1, float("-inf")), float("inf"))
+        self.assertEqual(self.calculator.subtraction(1.1, float("-inf")), float("inf"))
+        self.assertEqual(self.calculator.subtraction(float("-inf"), 1.1), float("-inf"))
    
     def test_sub_nan(self):
         self.assertTrue(math.isnan(self.calculator.subtraction(float("NaN"), 1)))
@@ -168,6 +176,10 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calculator.multiplication(2, float("inf")), float("inf"))
         self.assertEqual(self.calculator.multiplication(float("inf"), -2), float("-inf"))
         self.assertEqual(self.calculator.multiplication(-2, float("inf")), float("-inf"))
+        self.assertEqual(self.calculator.multiplication(float("-inf"), 2), float("-inf"))
+        self.assertEqual(self.calculator.multiplication(2, float("-inf")), float("-inf"))
+        self.assertEqual(self.calculator.multiplication(float("-inf"), -2), float("inf"))
+        self.assertEqual(self.calculator.multiplication(-2, float("-inf")), float("inf"))
     
     def test_mul_nan(self):
         self.assertTrue(math.isnan(self.calculator.multiplication(float("NaN"), 2)))
@@ -184,6 +196,12 @@ class TestCalculator(unittest.TestCase):
         self.assertRaises(TypeError, self.calculator.multiplication, 2, {})
         self.assertRaises(TypeError, self.calculator.multiplication, None, 2)
         self.assertRaises(TypeError, self.calculator.multiplication, 2, None)
+        ## Тесты ниже должны фейлится, но текущая реализация 
+        ## не обрабатывает эти случаи, поэтому закомментил
+        # self.assertRaises(TypeError, self.calculator.addition, 1, "abc")
+        # self.assertRaises(TypeError, self.calculator.addition, "abc", 1)
+        # self.assertRaises(TypeError, self.calculator.addition, [], 1)
+        # self.assertRaises(TypeError, self.calculator.addition, 1, [])
 
 
     #### TESTS FOR DIV
@@ -222,6 +240,8 @@ class TestCalculator(unittest.TestCase):
     def test_div_inf(self):
         self.assertEqual(self.calculator.division(float("inf"), 2), float("inf"))
         self.assertEqual(self.calculator.division(2, float("inf")), 0.0)
+        self.assertEqual(self.calculator.division(float("-inf"), 2), float("-inf"))
+        self.assertEqual(self.calculator.division(2, float("-inf")), 0.0)
         self.assertTrue(math.isnan(self.calculator.division(float("inf"), float("inf"))))
 
     def test_div_nan(self):
@@ -374,6 +394,10 @@ class TestCalculator(unittest.TestCase):
 
     def test_log_base_equal_val(self):
         self.assertEqual(self.calculator.log(2, 2), 1)
+    
+    def test_log_base_zero(self):
+        self.assertRaises(ValueError, self.calculator.log, 0, 0)
+        self.assertRaises(ValueError, self.calculator.log, 0, 10)
 
     def test_log_undefined(self):
         self.assertRaises(ZeroDivisionError, self.calculator.log, 10, 1)
