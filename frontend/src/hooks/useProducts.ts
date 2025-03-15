@@ -5,7 +5,7 @@ export const useProducts = (): Product[] => [
         id: 1,
         name: 'IPhone 14 Pro',
         description: 'Latest iphone, buy it now',
-        price: 999,
+        price: 98989998989899,
         priceSymbol: '$',
         category: 'Электроника',
         imgUrl: '/iphone.png',
