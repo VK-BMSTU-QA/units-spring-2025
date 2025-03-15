@@ -1,8 +1,6 @@
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MainPage } from './MainPage';
-import { useCurrentTime } from '../../hooks';
 import type { Product } from '../../types';
 
 afterEach(jest.clearAllMocks);
