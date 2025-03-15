@@ -11,28 +11,6 @@ describe('test main page component', () => {
         jest.spyOn(currentTimeHook, 'useCurrentTime').mockReturnValue(
             '00:00:00'
         );
-
-        jest.mock('../../../components/Categories', () => ({
-            Categories: ({
-                selectedCategories,
-                onCategoryClick,
-            }: {
-                selectedCategories: Category[];
-                onCategoryClick?: (category: Category) => void;
-            }) => (
-                <div data-testid="categories">
-                    {['Электроника', 'Одежда', 'Для дома'].map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => onCategoryClick?.(category as Category)}
-                            data-testid={`category-${category}`}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-            ),
-        }));
         
         jest.spyOn(productsHook, 'useProducts').mockReturnValue([
             {
