@@ -43,9 +43,9 @@ const products = [
 jest.mock('../../hooks', () => {
     return {
         useCurrentTime: jest.fn(() => '1:00:00'),
-        useProducts: jest.fn(() => products)
+        useProducts: jest.fn(() => products),
     }
-})
+});
 
 describe('Main page test', () => {
     afterEach(() => { jest.restoreAllMocks() });
