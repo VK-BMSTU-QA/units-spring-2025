@@ -120,7 +120,7 @@ describe('testing main page component', () => {
 
     it('updates categories if they have been clicked', () => {
         const { Categories } = jest.requireMock('../../../components/Categories/');
-        const { updateCategories } = jest.requireMock('../../../utils/');
+        const { applyCategories, updateCategories } = jest.requireMock('../../../utils/');
 
         const rendered = render(<MainPage />);
 
@@ -135,5 +135,7 @@ describe('testing main page component', () => {
         }), {});
         expect(updateCategories).toBeCalled();
         expect(updateCategories).toHaveBeenLastCalledWith([], mockCategory);
+
+        expect(applyCategories).toHaveBeenCalledTimes(2);
     })
 });
