@@ -23,8 +23,9 @@ describe('updateCategories function', () => {
 
     it('does not mutate the original array', () => {
         const original: Category[] = ['Электроника'];
+        const snapshot = [...original];
         updateCategories(original, 'Электроника');
-        expect(original).toHaveLength(1);
+        expect(original).toEqual(snapshot);
     });
 
     it('handles toggling with multiple additions', () => {
