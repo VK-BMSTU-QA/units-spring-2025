@@ -45,17 +45,9 @@ const products = [
 jest.mock('../../hooks', () => {
     return {
         useCurrentTime: jest.fn(() => '1:00:00'),
-        useProducts: jest.fn(() => products),
+        useProducts: () => products,
     }
 });
-
-jest.mock('../../utils', () => {
-    return {
-        applyCategories: jest.fn(() => products as Product[]),
-        updateCategories: jest.fn(() => [categories]),
-        getPrice: jest.fn(() => '1 $')
-    }
-})
 
 describe('Main page test', () => {
     afterEach(() => { jest.restoreAllMocks() });
@@ -65,21 +57,24 @@ describe('Main page test', () => {
         expect(rendered.asFragment()).toMatchSnapshot();
     });
 
-    it('should correct categories called', () => {
-        const { useCurrentTime } = jest.requireMock('../../hooks/');
-        const { useProducts } = jest.requireMock('../../hooks');
-        const { applyCategories } = jest.requireMock('../../utils');
-        const { updateCategories } = jest.requireMock('../../utils');
+    it('should correct categories', () => {
         categories.forEach((category) => {
             const rendered = render(<MainPage></MainPage>);
             const categoryBadge = rendered.getByText(category, {
                 selector: '.categories__badge',
             });
             fireEvent.click(categoryBadge);
-            expect(useProducts).toBeCalled();
-            expect(useCurrentTime).toBeCalled();
-            expect(applyCategories).toBeCalled();
-            expect(updateCategories).toBeCalled();
+            products.forEach((product) => {
+                if (product.category === category) {
+                    expect(
+                        rendered.getByText(product.name)
+                    ).toBeInTheDocument();
+                } else {
+                    expect(
+                        rendered.queryByText(product.name)
+                    ).not.toBeInTheDocument();
+                }
+            });
             rendered.unmount();
         });
     });
