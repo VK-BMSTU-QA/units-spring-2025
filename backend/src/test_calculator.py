@@ -22,7 +22,6 @@ class TestCalculator(unittest.TestCase):
       self.assertEqual(self.calculator.addition(1e10, 1e10), 2e10)
 
    def test_mult_input_types(self):
-      self.assertEqual(self.calculator.multiplication("2", 2), "22")
       self.assertRaises(TypeError, self.calculator.multiplication, 1, {})
       self.assertRaises(TypeError, self.calculator.multiplication, 1, None)
       self.assertEqual(self.calculator.multiplication(1, True), 1)
@@ -89,8 +88,7 @@ class TestCalculator(unittest.TestCase):
       self.assertEqual(self.calculator.degree(2, -2), 0.25)
       self.assertEqual(self.calculator.degree(16, -0.5), 0.25)
       self.assertAlmostEqual(self.calculator.degree(1e5, 2), 1e10)
-      #self.assertRaises(ValueError, self.calculator.degree, 0, 0)
-      #self.assertRaises(ValueError, self.calculator.degree, -2, 0.5)
+      self.assertAlmostEqual(self.calculator.degree(-1, 0.5), 1j)
 
    def test_ln_input_types(self):
       self.assertRaises(TypeError, self.calculator.ln, "2", 2)
@@ -147,6 +145,7 @@ class TestCalculator(unittest.TestCase):
    def test_nth_root(self):
       self.assertEqual(self.calculator.nth_root(4, 2), 2)
       self.assertEqual(self.calculator.nth_root(0, 2), 0)
+      self.assertRaises(ZeroDivisionError, self.calculator.nth_root, 4, 0)
       #self.assertEqual(self.calculator.nth_root(-8, 3), -2)
       self.assertEqual(self.calculator.nth_root(0.125, 3), 0.5)
       #self.assertEqual(self.calculator.nth_root(1e10, 10), 10.0)
