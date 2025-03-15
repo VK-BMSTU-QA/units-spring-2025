@@ -1,6 +1,6 @@
 import { act } from "react-dom/test-utils";
 import { useCurrentTime } from "../useCurrentTime";
-import { renderHook } from "@testing-library/react";
+import { cleanup, renderHook } from "@testing-library/react";
 
 // We use some obscure timezone manipulations to
 // ensure that in local time we got 00:00:00.
@@ -11,8 +11,12 @@ const mockDate = new Date(timezoneOffsettedDate.getTime() + timezoneOffsettedDat
 jest.useFakeTimers();
 jest.setSystemTime(mockDate);
 jest.spyOn(global, 'setInterval');
+jest.spyOn(global, 'clearInterval');
 
 describe("testing use current time hook", () => {
+
+    beforeEach(jest.clearAllMocks);
+    afterEach(cleanup);
 
     it('sets one second update interval', () => {
         renderHook(() => useCurrentTime());
@@ -38,4 +42,10 @@ describe("testing use current time hook", () => {
         });
         expect(result.current).toBe('00:00:02');
     });
+
+    it('clears interval after unmount', () => {
+        const { unmount } = renderHook(() => useCurrentTime());
+        unmount();
+        expect(clearInterval).toHaveBeenCalledTimes(1);
+    })
 })

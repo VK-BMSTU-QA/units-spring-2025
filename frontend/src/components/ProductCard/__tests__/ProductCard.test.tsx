@@ -28,13 +28,7 @@ describe('testing product card component', () => {
     it('renders', () => {
         const { asFragment } = render(
             <ProductCard
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                priceSymbol={product.priceSymbol}
-                category={product.category}
-                imgUrl={product.imgUrl}
+                {...product}
             />
         );
         expect(asFragment()).toMatchSnapshot();
@@ -44,13 +38,7 @@ describe('testing product card component', () => {
         const { getPrice } = jest.requireMock('../../../utils');
         const rendered = render(
             <ProductCard
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                priceSymbol={product.priceSymbol}
-                category={product.category}
-                imgUrl={product.imgUrl}
+                {...product}
             />
         );
 
@@ -63,13 +51,7 @@ describe('testing product card component', () => {
     it('renders product card image if it is provided', () => {
         const rendered = render(
             <ProductCard
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                priceSymbol={product.priceSymbol}
-                category={product.category}
-                imgUrl={product.imgUrl}
+                {...product}
             />
         );
 
@@ -82,6 +64,7 @@ describe('testing product card component', () => {
 
     it('does not render product card image if it is not provided', () => {
         const rendered = render(
+            // not using {...product} here because we need to pass null refUrl
             <ProductCard
                 id={product.id}
                 name={product.name}
