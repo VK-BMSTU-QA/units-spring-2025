@@ -55,7 +55,7 @@ exports[`Main page test should render correctly 1`] = `
         <h1
           class="product-card__price"
         >
-          999 $
+          1 $
         </h1>
         <div
           class="product-card__category"
@@ -88,7 +88,7 @@ exports[`Main page test should render correctly 1`] = `
         <h1
           class="product-card__price"
         >
-          1 000 ₽
+          1 $
         </h1>
         <div
           class="product-card__category"
@@ -116,7 +116,7 @@ exports[`Main page test should render correctly 1`] = `
         <h1
           class="product-card__price"
         >
-          699 ₽
+          1 $
         </h1>
         <div
           class="product-card__category"
@@ -149,7 +149,7 @@ exports[`Main page test should render correctly 1`] = `
         <h1
           class="product-card__price"
         >
-          7 000 ₽
+          1 $
         </h1>
         <div
           class="product-card__category"
