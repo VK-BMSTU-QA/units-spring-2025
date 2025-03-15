@@ -85,6 +85,11 @@ class TestCalculator(unittest.TestCase):
         """Проверка сложения очень малых чисел."""
         self.assertAlmostEqual(self.calculator.addition(1e-10, 2e-10), 3e-10)
 
+    def test_addition_complex(self):
+        """Проверка сложения комплексных чисел."""
+        self.assertEqual(self.calculator.addition(complex(2, 3), complex(1, -1)), complex(3, 2))
+        self.assertEqual(self.calculator.addition(complex(-4, 2), complex(3, -5)), complex(-1, -3))
+
     # Тесты для multiplication
     def test_multiplication_positive(self):
         """Проверка умножения двух положительных чисел."""
@@ -168,6 +173,11 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calculator.multiplication(5, 1), 5)
         self.assertEqual(self.calculator.multiplication(-5, 1), -5)
         self.assertEqual(self.calculator.multiplication(0, 1), 0)
+
+    def test_multiplication_complex(self):
+        """Проверка умножения комплексных чисел."""
+        self.assertEqual(self.calculator.multiplication(complex(2, 3), complex(1, -1)), complex(5, 1))
+        self.assertEqual(self.calculator.multiplication(complex(0, 1), complex(0, 1)), complex(-1, 0))
 
     # Тесты для subtraction
     def test_subtraction_positive(self):
@@ -255,6 +265,11 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(self.calculator.subtraction(5, 5), 0)
         self.assertEqual(self.calculator.subtraction(-5, -5), 0)
         self.assertEqual(self.calculator.subtraction(0, 0), 0)
+
+    def test_subtraction_complex(self):
+        """Проверка вычитания комплексных чисел."""
+        self.assertEqual(self.calculator.subtraction(complex(5, 6), complex(2, 3)), complex(3, 3))
+        self.assertEqual(self.calculator.subtraction(complex(3, -1), complex(1, -4)), complex(2, 3))
 
     # Тесты для division
     def test_division_positive(self):
@@ -353,6 +368,15 @@ class TestCalculator(unittest.TestCase):
     def test_division_zero_by_zero(self):
         """Проверка деления нуля на ноль."""
         self.assertIsNone(self.calculator.division(0, 0))
+
+    def test_division_complex(self):
+        """Проверка деления комплексных чисел."""
+        self.assertEqual(self.calculator.division(complex(2, 3), complex(1, -1)), complex(-0.5, 2.5))
+        self.assertEqual(self.calculator.division(complex(4, 2), complex(1, 1)), complex(3, -1))
+
+    def test_division_by_zero_complex(self):
+        """Проверка деления комплексного числа на ноль."""
+        self.assertEqual(self.calculator.division(complex(1, 1), complex(0, 0)), None)
 
     # Тесты для absolute
     def test_absolute_positive(self):

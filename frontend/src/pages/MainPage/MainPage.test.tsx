@@ -53,11 +53,10 @@ describe('MainPage Component', () => {
         (useProducts as jest.Mock).mockReturnValue(mockProducts);
         (useCurrentTime as jest.Mock).mockReturnValue(time);
         (applyCategories as jest.Mock).mockImplementation(
-            (products: Array<Product>, categories) =>
-                products.filter((product: Product) =>
-                    categories.includes(product.category)
-                )
-        );
+            (products: Array<Product>, categories: Category[]) =>
+                categories.length === 0
+                    ? products
+                    : products.filter(product => categories.includes(product.category)));
 
         (updateCategories as jest.Mock).mockImplementation(
             (categories, clickedCategory) =>
@@ -117,5 +116,15 @@ describe('MainPage Component', () => {
             ['Одежда'],
             'Одежда'
         );
+    });
+
+    it('displays all products when no categories are selected', () => {
+        render(<MainPage />);
+
+        expect(applyCategories).toHaveBeenCalledWith(mockProducts, []);
+
+        mockProducts.forEach(product => {
+            expect(screen.getByText(product.name)).toBeInTheDocument();
+        });
     });
 });
