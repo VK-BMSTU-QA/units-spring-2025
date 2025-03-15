@@ -24,6 +24,9 @@ class TestCalculator(unittest.TestCase):
     def test_add_float_neg(self):
         self.assertEqual(self.calculator.addition(-1.1, -1.2), -2.3)
 
+    def test_add_complex(self):
+        self.assertEqual(self.calculator.addition(1 + 2j, 3 + 4j), 4 + 6j)
+
     def test_add_invalid_None(self):
         self.assertRaises(TypeError, self.calculator.addition, None, None)
 
@@ -51,6 +54,9 @@ class TestCalculator(unittest.TestCase):
 
     def test_mul_float_mixed_sign(self):
         self.assertAlmostEqual(self.calculator.multiplication(-1.5, 2.5), -3.75)
+
+    def test_mul_complex(self):
+        self.assertEqual(self.calculator.multiplication(1 + 2j, 3 + 4j), -5 + 10j)
 
     def test_mul_zero(self):
         self.assertEqual(self.calculator.multiplication(5, 0), 0)
@@ -83,6 +89,9 @@ class TestCalculator(unittest.TestCase):
     def test_sub_float_mixed_sign(self):
         self.assertAlmostEqual(self.calculator.subtraction(-5.5, 3.3), -8.8)
 
+    def test_sub_complex(self):
+        self.assertEqual(self.calculator.subtraction(1 + 2j, 3 + 4j), -2 - 2j)
+
     def test_sub_zero(self):
         self.assertEqual(self.calculator.subtraction(5, 0), 5)
 
@@ -114,6 +123,12 @@ class TestCalculator(unittest.TestCase):
     def test_div_float_mixed_sign(self):
         self.assertAlmostEqual(self.calculator.division(-6.6, 3.3), -2.0)
 
+    def test_div_complex(self):
+        result = self.calculator.division(1 + 2j, 3 + 4j)
+        expected = 0.44 + 0.08j
+        self.assertAlmostEqual(result.real, expected.real, places=2)
+        self.assertAlmostEqual(result.imag, expected.imag, places=2)
+
     def test_div_zero(self):
         self.assertIsNone(self.calculator.division(5, 0))
 
@@ -135,6 +150,9 @@ class TestCalculator(unittest.TestCase):
 
     def test_abs_int_zero(self):
         self.assertEqual(self.calculator.absolute(0), 0)
+
+    def test_abs_complex(self):
+        self.assertEqual(self.calculator.absolute(3 + 4j), 5)
 
     def test_abs_invalid_None(self):
         self.assertRaises(TypeError, self.calculator.absolute, None, None)
@@ -170,6 +188,12 @@ class TestCalculator(unittest.TestCase):
     def test_degree_float_to_float(self):
         self.assertAlmostEqual(self.calculator.degree(3.5, 2.5), 22.9176515)
 
+    def test_degree_complex(self):
+        result = self.calculator.degree(1 + 2j, 2)
+        expected = -3 + 4j
+        self.assertAlmostEqual(result.real, expected.real, places=6)
+        self.assertAlmostEqual(result.imag, expected.imag, places=6)
+
     def test_degree_invalid_None(self):
         self.assertRaises(TypeError, self.calculator.degree, None, None)
 
@@ -188,6 +212,9 @@ class TestCalculator(unittest.TestCase):
 
     def test_ln_float_pos(self):
         self.assertAlmostEqual(self.calculator.ln(10.3), 2.3321439)
+
+    def test_ln_complex(self):
+        self.assertRaises(TypeError, self.calculator.ln, 1 + 1j)
 
     def test_ln_invalid_zero(self):
         self.assertRaises(ValueError, self.calculator.ln, 0)
@@ -210,6 +237,9 @@ class TestCalculator(unittest.TestCase):
 
     def test_log_float_pos(self):
         self.assertAlmostEqual(self.calculator.log(8, 2), 3)
+
+    def test_log_complex(self):
+        self.assertRaises(TypeError, self.calculator.log, 1 + 1j, 10)
 
     def test_log_invalid_base_one(self):
         self.assertRaises(ZeroDivisionError, self.calculator.log, 10, 1)
@@ -242,6 +272,12 @@ class TestCalculator(unittest.TestCase):
     def test_sqrt_neg(self):
         self.assertAlmostEqual(self.calculator.sqrt(-4), 2j)
 
+    def test_sqrt_complex(self):
+        result = self.calculator.sqrt(1 + 1j)
+        expected = 1.0986841 + 0.45508986j
+        self.assertAlmostEqual(result.real, expected.real, places=6)
+        self.assertAlmostEqual(result.imag, expected.imag, places=6)
+
     def test_sqrt_invalid_None(self):
         self.assertRaises(TypeError, self.calculator.sqrt, None)
 
@@ -264,8 +300,20 @@ class TestCalculator(unittest.TestCase):
     def test_nth_root_zero_base(self):
         self.assertEqual(self.calculator.nth_root(0, 2), 0)
 
+    def test_nth_root_negative_base(self):
+        result = self.calculator.nth_root(-4, 2)
+        expected = 2j
+        self.assertAlmostEqual(result.real, expected.real, places=6)
+        self.assertAlmostEqual(result.imag, expected.imag, places=6)
+
     def test_nth_root_invalid_zero_root(self):
         self.assertRaises(ZeroDivisionError, self.calculator.nth_root, 10, 0)
+
+    def test_nth_root_complex_base(self):
+        result = self.calculator.nth_root(1 + 1j, 3)
+        expected = 1.0842151 + 0.2905146j
+        self.assertAlmostEqual(result.real, expected.real, places=6)
+        self.assertAlmostEqual(result.imag, expected.imag, places=6)
 
     def test_nth_root_invalid_None(self):
         self.assertRaises(TypeError, self.calculator.nth_root, None, None)
