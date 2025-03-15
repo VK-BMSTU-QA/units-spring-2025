@@ -48,10 +48,6 @@ jest.mock('../../hooks', () => {
 })
 
 describe('Main page test', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
-
     afterEach(() => { jest.restoreAllMocks() });
 
     it('should render correctly', () => {
