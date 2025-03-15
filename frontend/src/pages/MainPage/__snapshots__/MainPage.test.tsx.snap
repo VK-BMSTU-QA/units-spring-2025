@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage renders Categories component 1`] = `
+<DocumentFragment>
+  <div
+    class="main-page"
+  >
+    <h2
+      class="main-page__title"
+    >
+      VK Маркет
+    </h2>
+    <h3>
+      12:00
+    </h3>
+    <div
+      class="main-page__parameters"
+    >
+      <div>
+        <button>
+          Category 1
+        </button>
+        <button>
+          Category 2
+        </button>
+      </div>
+    </div>
+    <div>
+      Product 1
+    </div>
+    <div>
+      Product 2
+    </div>
+    <div>
+      Product 3
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`MainPage renders MainPage with title and current time 1`] = `
+<DocumentFragment>
+  <div
+    class="main-page"
+  >
+    <h2
+      class="main-page__title"
+    >
+      VK Маркет
+    </h2>
+    <h3>
+      12:00
+    </h3>
+    <div
+      class="main-page__parameters"
+    >
+      <div>
+        <button>
+          Category 1
+        </button>
+        <button>
+          Category 2
+        </button>
+      </div>
+    </div>
+    <div>
+      Product 1
+    </div>
+    <div>
+      Product 2
+    </div>
+    <div>
+      Product 3
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`MainPage renders product cards based on products 1`] = `
+<DocumentFragment>
+  <div
+    class="main-page"
+  >
+    <h2
+      class="main-page__title"
+    >
+      VK Маркет
+    </h2>
+    <h3>
+      12:00
+    </h3>
+    <div
+      class="main-page__parameters"
+    >
+      <div>
+        <button>
+          Category 1
+        </button>
+        <button>
+          Category 2
+        </button>
+      </div>
+    </div>
+    <div>
+      Product 1
+    </div>
+    <div>
+      Product 2
+    </div>
+    <div>
+      Product 3
+    </div>
+  </div>
+</DocumentFragment>
+`;

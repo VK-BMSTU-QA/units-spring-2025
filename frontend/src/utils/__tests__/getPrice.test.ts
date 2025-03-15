@@ -12,11 +12,6 @@ describe('test get price function', () => {
         expect(getPrice(199.95, '$')).toBe('199,95 $');
     });
 
-    // Тест с пустым символом валюты
-    it('should handle empty currency symbol correctly', () => {
-        expect(getPrice(100)).toBe('100 ');
-    });
-
     // Тест с отсутствующим символом валюты (undefined или null)
     it('should handle undefined or null currency symbol correctly', () => {
         expect(getPrice(100, undefined)).toBe('100 ');

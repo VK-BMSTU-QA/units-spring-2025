@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MainPage } from './MainPage';
 import { useProducts, useCurrentTime } from '../../hooks';
 import { Categories } from '../../components';
+import '@testing-library/jest-dom/extend-expect';
 
 // Мокаем хуки и компоненты
 jest.mock('../../hooks', () => ({
@@ -38,6 +39,37 @@ describe('MainPage', () => {
     beforeEach(() => {
         (useProducts as jest.Mock).mockReturnValue(mockProducts);
         (useCurrentTime as jest.Mock).mockReturnValue('12:00');
+    });
+
+    test('renders MainPage with title and current time', () => {
+        const { asFragment } = render(<MainPage />);
+
+        expect(screen.getByText('VK Маркет')).toBeInTheDocument();
+        expect(screen.getByText('12:00')).toBeInTheDocument();
+
+        // Добавляем снимок
+        expect(asFragment()).toMatchSnapshot();
+    });
+
+    test('renders Categories component', () => {
+        const { asFragment } = render(<MainPage />);
+
+        expect(screen.getByText('Category 1')).toBeInTheDocument();
+        expect(screen.getByText('Category 2')).toBeInTheDocument();
+
+        // Добавляем снимок
+        expect(asFragment()).toMatchSnapshot();
+    });
+
+    test('renders product cards based on products', () => {
+        const { asFragment } = render(<MainPage />);
+
+        expect(screen.getByText('Product 1')).toBeInTheDocument();
+        expect(screen.getByText('Product 2')).toBeInTheDocument();
+        expect(screen.getByText('Product 3')).toBeInTheDocument();
+
+        // Добавляем снимок
+        expect(asFragment()).toMatchSnapshot();
     });
 
     test('renders MainPage with title and current time', () => {

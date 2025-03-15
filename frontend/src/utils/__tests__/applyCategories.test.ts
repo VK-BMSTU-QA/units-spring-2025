@@ -3,10 +3,34 @@ import type { Category, Product } from '../../types';
 
 describe('test applyCategories function', () => {
     const products: Product[] = [
-        // { id: 1, name: 'Телефон', category: 'Электроника', price: 10000 },
-        // { id: 2, name: 'Футболка', category: 'Одежда', price: 500 },
-        // { id: 3, name: 'Книга', category: 'Книги', price: 300 },
-        // { id: 4, name: 'Ноутбук', category: 'Электроника', price: 50000 },
+        {
+            id: 1,
+            name: 'Телефон',
+            category: 'Электроника',
+            price: 10000,
+            description: '',
+        },
+        {
+            id: 2,
+            name: 'Футболка',
+            category: 'Одежда',
+            price: 500,
+            description: '',
+        },
+        {
+            id: 3,
+            name: 'Книга',
+            category: 'Книги',
+            price: 300,
+            description: '',
+        },
+        {
+            id: 4,
+            name: 'Ноутбук',
+            category: 'Электроника',
+            price: 50000,
+            description: '',
+        },
         {
             id: 1001,
             name: 'Mazda',
@@ -47,6 +71,30 @@ describe('test applyCategories function', () => {
         expect(filteredProducts).toEqual([
             { id: 1, name: 'Телефон', category: 'Электроника', price: 10000 },
             { id: 4, name: 'Ноутбук', category: 'Электроника', price: 50000 },
+            {
+                id: 1001,
+                name: 'Mazda',
+                description: 'The best Japan auto',
+                price: 1999,
+                priceSymbol: '$',
+                category: 'Электроника',
+            },
+            {
+                id: 1002,
+                name: 'BelAZ',
+                description: 'The best Belarus auto',
+                price: 999999,
+                priceSymbol: '₽',
+                category: 'Электроника',
+            },
+            {
+                id: 1003,
+                name: 'Dodge',
+                description: 'The best American auto',
+                price: 2999,
+                priceSymbol: '$',
+                category: 'Электроника',
+            },
         ]);
     });
 
@@ -58,6 +106,30 @@ describe('test applyCategories function', () => {
             { id: 1, name: 'Телефон', category: 'Электроника', price: 10000 },
             { id: 2, name: 'Футболка', category: 'Одежда', price: 500 },
             { id: 4, name: 'Ноутбук', category: 'Электроника', price: 50000 },
+            {
+                id: 1001,
+                name: 'Mazda',
+                description: 'The best Japan auto',
+                price: 1999,
+                priceSymbol: '$',
+                category: 'Электроника',
+            },
+            {
+                id: 1002,
+                name: 'BelAZ',
+                description: 'The best Belarus auto',
+                price: 999999,
+                priceSymbol: '₽',
+                category: 'Электроника',
+            },
+            {
+                id: 1003,
+                name: 'Dodge',
+                description: 'The best American auto',
+                price: 2999,
+                priceSymbol: '$',
+                category: 'Электроника',
+            },
         ]);
     });
 

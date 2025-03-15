@@ -50,4 +50,23 @@ describe('Product card test', () => {
         );
         expect(rendered.baseElement).toContainHTML('img');
     });
+
+    it('should call getPrice with correct arguments', () => {
+        const price = 9999494;
+        const priceSymbol = '$';
+        const getPriceSpy = jest.spyOn(require('./ProductCard'), 'getPrice');
+
+        render(
+            <ProductCard
+                name="Mazda"
+                description="Best Japan auto"
+                price={price}
+                priceSymbol={priceSymbol}
+                category="Электроника"
+                id={1001}
+            />
+        );
+
+        expect(getPriceSpy).toHaveBeenCalledWith(price, priceSymbol);
+    });
 });
