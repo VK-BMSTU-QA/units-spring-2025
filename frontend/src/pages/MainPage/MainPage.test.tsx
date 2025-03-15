@@ -43,6 +43,7 @@ const products = [
 jest.mock('../../hooks', () => {
     return {
         useCurrentTime: jest.fn(() => '1:00:00'),
+        useProducts: jest.fn(() => products),
     }
 });
 
@@ -55,6 +56,8 @@ describe('Main page test', () => {
     });
 
     it('should correct categories', () => {
+        const { useCurrentTime } = jest.requireMock('../../hooks/');
+        const { useProducts } = jest.requireMock('../../hooks');
         categories.forEach((category) => {
             const rendered = render(<MainPage></MainPage>);
             const categoryBadge = rendered.getByText(category, {
@@ -72,6 +75,8 @@ describe('Main page test', () => {
                     ).not.toBeInTheDocument();
                 }
             });
+            expect(useProducts).toBeCalled();
+            expect(useCurrentTime).toBeCalled();
             rendered.unmount();
         });
     });
