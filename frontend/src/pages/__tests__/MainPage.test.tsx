@@ -5,6 +5,15 @@ import { Product } from '../../types';
 import { useProducts } from '../../hooks';
 
 describe('test MainPage', () => {
+    beforeAll(() => {
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date('2025-03-14T00:00:00Z'));
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+
     it('should return render snapshot', () => {
         const r = render(<MainPage />);
         expect(r.asFragment()).toMatchSnapshot();
