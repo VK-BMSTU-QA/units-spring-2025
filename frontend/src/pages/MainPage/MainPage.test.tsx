@@ -79,4 +79,19 @@ describe('Test MainPage component', () => {
         fireEvent.click(r.getAllByText('Электроника')[0]);
         expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
     });
+
+    it('disables active filter on click', () => {
+        jest.mock('../../hooks', () => {
+            return {
+                useProducts: jest.fn().mockReturnValue(testProducts),
+            };
+        });
+
+        const r = render(<MainPage />);
+        expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
+        fireEvent.click(r.getAllByText('Для дома')[0]);
+        expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
+        fireEvent.click(r.getAllByText('Для дома')[0]);
+        expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
+    });
 });
