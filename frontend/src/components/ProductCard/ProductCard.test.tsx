@@ -4,12 +4,17 @@ import '@testing-library/jest-dom';
 import { ProductCard } from './ProductCard';
 import { getPrice } from '../../utils';
 
+jest.mock('../../utils/getPrice', () => ({
+    getPrice: jest.fn((a, b = '₽') => a + " " + b),
+  }));
+
 afterEach(jest.clearAllMocks);
+
+
 
 describe('ProductCard test', () => {
     it('should render correctly', () => {
         const rendered = render(<ProductCard id={1} name="name" description="description" price={1} priceSymbol='$' category="Для дома" imgUrl='imgUrl' />);
-
         expect(rendered.asFragment()).toMatchSnapshot();
     });
 

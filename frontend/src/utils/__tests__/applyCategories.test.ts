@@ -1,7 +1,7 @@
 import { applyCategories } from '../applyCategories';
 
 describe('test applyCategories', () => {
-    it('must fitler list', () => {
+    it('must filter list', () => {
         expect(applyCategories([{id: 1,
             name: "name",
             description: "description",

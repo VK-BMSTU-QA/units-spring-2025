@@ -1,13 +1,46 @@
-import { fireEvent, renderHook } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react";
 import { useCurrentTime } from "../useCurrentTime";
 
+const mockDate = new Date(2004, 9, 12, 20);
+
 describe("useCurrentTime", () => {
-  it("should useCurrentTime correct", () => {
-    const date = new Date(2004, 9, 12, 20);
-    const spy = jest.spyOn(global, 'Date').mockImplementation(() => date);
-    const useCurrentTimeResult  = (renderHook(() => useCurrentTime())).result.current;
-    expect(spy).toBeCalledTimes(1);
-    expect(useCurrentTimeResult).toBe(date.toLocaleTimeString('ru-RU'))
-    spy.mockRestore();
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+    jest.spyOn(global, 'setInterval');
+    jest.spyOn(global, 'clearInterval');
+    jest.setSystemTime(mockDate);
   });
+
+
+  it('initial time', () => {
+    const { result } = renderHook(() => useCurrentTime());
+
+    expect(setInterval).toHaveBeenCalledTimes(1);
+    expect(clearInterval).toHaveBeenCalledTimes(0);
+    expect(result.current).toBe("20:00:00");
+  });
+
+  it('clearInterval and setInterval by advanceTimer', () => {
+      const { result } = renderHook(() => useCurrentTime());
+      act(() => {
+          jest.advanceTimersByTime(1000);
+      });
+      expect(result.current).toBe("20:00:01");
+
+      act(() => {
+          jest.advanceTimersByTime(60000);
+      });
+      expect(result.current).toBe("20:01:01");
+      expect(clearInterval).toHaveBeenCalledTimes(2);
+      expect(setInterval).toHaveBeenCalledTimes(3);
+    });
+
+  it('unmount', () => {
+    const { unmount } = renderHook(() => useCurrentTime());
+    unmount();
+    expect(clearInterval).toHaveBeenCalledTimes(1);
+    expect(setInterval).toHaveBeenCalledTimes(1);
+  });
+
 }); 
