@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainPage should render correctly 1`] = `
+exports[`test main page component should render correctly 1`] = `
 <DocumentFragment>
   <div
     class="main-page"

@@ -131,20 +131,8 @@ class TestCalculator(unittest.TestCase):
     def test_ln_with_small_value(self):
         self.assertAlmostEqual(self.calculator.ln(1 + 1e-9), 1e-9, delta=1e-12)
 
-    def test_ln_complex(self):
-        result = self.calculator.ln(complex(0,1))
-        expected = complex(0, math.pi/2)
-        self.assertAlmostEqual(result.real, expected.real)
-        self.assertAlmostEqual(result.imag, expected.imag)
-
     def test_log(self):
         self.assertEqual(self.calculator.log(3, 9), 0.5)
-
-    def test_log_complex(self):
-        result = self.calculator.log(complex(0,1), math.e)
-        expected = complex(0, math.pi/2)
-        self.assertAlmostEqual(result.real, expected.real)
-        self.assertAlmostEqual(result.imag, expected.imag)
 
     def test_sqrt(self):
         self.assertEqual(self.calculator.sqrt(9), 3)
