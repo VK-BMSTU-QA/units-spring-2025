@@ -90,7 +90,7 @@ describe('Test MainPage component', () => {
         const r = render(<MainPage />);
         expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
         fireEvent.click(r.getAllByText('Для дома')[0]);
-        expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
+        expect(r.asFragment()).not.toHaveTextContent('IPhone 14 Pro');
         fireEvent.click(r.getAllByText('Для дома')[0]);
         expect(r.asFragment()).toHaveTextContent('IPhone 14 Pro');
     });
